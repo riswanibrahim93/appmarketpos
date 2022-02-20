@@ -50,10 +50,11 @@
           	<div class="font-small-2">Upload Foto terbaik <span class="badge badge-dark">Max.3 (JPG/JPEG/PNG)</span></div>
           </div>
 
-          <div class="col-4 col-md-12 mb-2">
+          <div class="col-4 col-md-4 mb-2">
             <span class="position-absolute" onclick="delete_image1()">&times;</span>
+            <br>
             <figure class="image-container">
-                <img id="chosen-image1" style="width: 30% !important">
+                <img id="chosen-image1" style="width: 100% !important">
             </figure>
 
             <input class="input-image" type="file" id="upload-button1" name="image1">
@@ -61,10 +62,11 @@
                 <i class="fas fa-upload"></i> &nbsp; Choose A Photo
             </label>
           </div>
-          <div class="col-4 col-md-12 mb-2">
+          <div class="col-4 col-md-4 mb-2">
             <span class="position-absolute" onclick="delete_image2()">&times;</span>
+            <br>
             <figure class="image-container">
-                <img id="chosen-image2" style="width: 30% !important">
+                <img id="chosen-image2" style="width: 100% !important">
             </figure>
 
             <input class="input-image" type="file" id="upload-button2" name="image2">
@@ -72,10 +74,11 @@
                 <i class="fas fa-upload"></i> &nbsp; Choose A Photo
             </label>
           </div>
-          <div class="col-4 col-md-12 mb-2">
+          <div class="col-4 col-md-4 mb-2">
             <span class="position-absolute" onclick="delete_image3()">&times;</span>
+            <br>
             <figure class="image-container">
-                <img id="chosen-image3" style="width: 30% !important">
+                <img id="chosen-image3" style="width: 100% !important">
             </figure>
 
             <input class="input-image" type="file" id="upload-button3" name="image3">
@@ -241,7 +244,7 @@
                                       <!-- <a href="index.php?menu=edit_product"> -->
                                         <a onclick="show(<?php echo $b['kd_barang'] ?>)">
                                         	<i class="fas fa-edit"></i></a>
-                                        <a class="action-delete" onclick="deleteImage(<?php echo $b['kd_barang'] ?>)"><i class="fas fa-trash-alt"></i></a>
+                                        <a class="action-delete" onclick="deleteImage('<?php echo $b['kd_barang'] ?>')"><i class="fas fa-trash-alt"></i></a>
                                    </td>
                                  </tr>
                                    <?php } ?>                                                  
@@ -435,24 +438,17 @@
           <span aria-hidden="true">&times;</span></button>
         </div>
         <div class="modal-body">              
-          <div class="row">
-            <div class="col-12 col-md-12">
-              <div class="font-small-2">Kode barang</div>
-                <fieldset>
-                  <div class="input-group">
-                     <input type="text" class="form-control" placeholder="Scan Here!" name="kode" id="kd_barang" value="">
-                        <div class="input-group-append" id="button-addon2">
-                           <button class="btn btn-primary rounded-0" type="button"><i class="fas fa-qrcode"></i></button>
-                        </div>
-                     </div>
-                </fieldset>
+          <div class="row">            
+            <input type="text" hidden name="kode" id="kd_barang">
+            <div class="col-12 col-md-12 mt-2 mb-1">
+              <div class="font-small-2">Upload Foto terbaik <span class="badge badge-dark">Max.3 (JPG/JPEG/PNG)</span></div>
             </div>
-
-
-            <div class="col-4 col-md-12 mb-2">
+            <div class="col-4 col-md-4 mb-2 mt-2">
               <span class="position-absolute" onclick="edit_delete_image1()">&times;</span>
+              <br>
+              <input type="text" name="cek_hapus1" id="cek_hapus1" hidden>
               <figure class="image-container">
-                  <img id="edit-chosen-image1" style="width: 30% !important">
+                  <img id="edit-chosen-image1" style="width: 100% !important">
               </figure>
 
               <input class="input-image" type="file" id="edit-upload-button1" name="edit-image1">
@@ -460,10 +456,12 @@
                   <i class="fas fa-upload"></i> &nbsp; Choose A Photo
               </label>
             </div>
-            <div class="col-4 col-md-12 mb-2">
+            <div class="col-4 col-md-4 mb-2 mt-2">
               <span class="position-absolute" onclick="edit_delete_image2()">&times;</span>
+              <br>
+              <input type="text" name="cek_hapus2" id="cek_hapus2" hidden>
               <figure class="image-container">
-                  <img id="edit-chosen-image2" style="width: 30% !important">
+                  <img id="edit-chosen-image2" style="width: 100% !important">
               </figure>
 
               <input class="input-image" type="file" id="edit-upload-button2" name="edit-image2">
@@ -471,21 +469,18 @@
                   <i class="fas fa-upload"></i> &nbsp; Choose A Photo
               </label>
             </div>
-            <div class="col-4 col-md-12 mb-2">
+            <div class="col-4 col-md-4 mb-2 mt-2">
               <span class="position-absolute" onclick="edit_delete_image3()">&times;</span>
+              <br>
+              <input type="text" name="cek_hapus3" id="cek_hapus3" hidden>
               <figure class="image-container">
-                  <img id="edit-chosen-image3" style="width: 30% !important">
+                  <img id="edit-chosen-image3" style="width: 100% !important">
               </figure>
 
               <input class="input-image" type="file" id="edit-upload-button3" name="edit-image3">
               <label class="label-images" for="edit-upload-button3">
                   <i class="fas fa-upload"></i> &nbsp; Choose A Photo
               </label>
-            </div>
-
-
-            <div class="col-12 col-md-12 mt-2 mb-1">
-              <div class="font-small-2">Upload Foto terbaik <span class="badge badge-dark">Max.3 (JPG/JPEG/PNG)</span></div>
             </div>
 
             <div class="col-12 col-md-12">
@@ -677,6 +672,7 @@
 
   function edit_delete_image1(){
     chosenImageEdit1.setAttribute("src","")
+    $('#cek_hapus1').val('1');
   }
 
   uploadButtonEdit2.onchange = () => {
@@ -689,6 +685,7 @@
 
   function edit_delete_image2(){
     chosenImageEdit2.setAttribute("src","")
+    $('#cek_hapus2').val('1');
   }
 
   uploadButtonEdit3.onchange = () => {
@@ -701,6 +698,7 @@
 
   function edit_delete_image3(){
     chosenImageEdit3.setAttribute("src","")
+    $('#cek_hapus3').val('1');
   }
 
 
@@ -874,6 +872,7 @@
   }
 
   function deleteImage(id){
+    console.log(id);
     $.ajax({
       type: "GET",
       url: "../aksi/delete_produk.php?id_produk="+id,
@@ -886,7 +885,17 @@
 
   function show(id) {
     var response = [];
+    var gambar = "";
     let text = "";
+
+    chosenImageEdit1.setAttribute("src","");
+    chosenImageEdit2.setAttribute("src","");
+    chosenImageEdit3.setAttribute("src","");
+
+    $('#cek_hapus1').val('');
+    $('#cek_hapus2').val('');
+    $('#cek_hapus3').val('');
+
     $.ajax({
       type: "GET",
       url: "../aksi/show_produk.php?id_produk="+id,
@@ -963,20 +972,20 @@
         </div>`
     }
     $("#varian_edit").html(text);
-    var gambar = response.gambar.gambar
+    gambar = response.gambar.gambar
     gambar = gambar.split(',');
-    console.log(gambar);
-    if(gambar[0] != null){
+    console.log(gambar[2]);
+
+    if(gambar[0] != "kosong"){
       chosenImageEdit1.setAttribute("src","../img/produk/"+gambar[0]);
 
     }
-    if(gambar[1] != null){
+    if(gambar[1] != "kosong"){
       chosenImageEdit2.setAttribute("src","../img/produk/"+gambar[1]);
 
     }
-    if(gambar[2] != null){
+    if(gambar[2] != "kosong"){
       chosenImageEdit3.setAttribute("src","../img/produk/"+gambar[2]);
-
     }
     $("#modal_produk").modal('show');
   }

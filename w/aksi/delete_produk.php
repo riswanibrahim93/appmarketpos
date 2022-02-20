@@ -9,13 +9,13 @@ $produk = [];
 $text = "";
 
 $id_produk = $_GET['id_produk'];
-$ketQuery = "DELETE FROM `tabel_barang` WHERE `kd_barang` = $id_produk";
+$ketQuery = "DELETE FROM `tabel_barang` WHERE `kd_barang` = '$id_produk'";
 $executeSatBarang = mysqli_query($koneksi, $ketQuery);
 
-$ketQuery = "DELETE FROM `tabel_stok_toko` WHERE `kd_barang` = $id_produk";
+$ketQuery = "DELETE FROM `tabel_stok_toko` WHERE `kd_barang` = '$id_produk'";
 $executeSatStok = mysqli_query($koneksi, $ketQuery);
 
-$ketQuery = "DELETE FROM `tabel_barang_gambar` WHERE `id_brg` = $id_produk";
+$ketQuery = "DELETE FROM `tabel_barang_gambar` WHERE `id_brg` = '$id_produk'";
 $executeSatGambar = mysqli_query($koneksi, $ketQuery);
 
 if($executeSatBarang){

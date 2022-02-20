@@ -2,7 +2,7 @@
 session_start();
 include '../inc/koneksi.php';
 // var_dump($_POST);
-// var_dump($_FILES['image1']);
+var_dump($_FILES);
 
 
 if(isset($_POST['upload_product'])){
@@ -58,6 +58,9 @@ if(isset($_POST['upload_product'])){
 			move_uploaded_file($image_tmp[$i], '../img/produk/'.$image_name_new[$i]);
 			$images .= $image_name_new[$i].',';
 		}
+		else{
+			$images .= 'kosong,';
+		}
 
 		// cek ukuran
 		if($image_size[$i] > 100000){
@@ -72,8 +75,8 @@ if(isset($_POST['upload_product'])){
 	}
 
 	$images = substr($images, 0, -1);
-	// var_dump($images);
- // die;
+	var_dump($images);
+ die;
 
 
 

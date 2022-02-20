@@ -77,7 +77,7 @@
         <div class="navbar-header d-xl-block d-none">
             <ul class="nav navbar-nav flex-row">
                 <li class="nav-item"><a class="navbar-brand mt-2" href="../">
-                        <img src="img/<?php echo $a['logo'];?>" width="75" />
+                        <img src="img/toko/<?php echo $a['logo'];?>" width="75" />
                     </a></li>
             </ul>
         </div>
@@ -95,7 +95,7 @@
                     <ul class="nav navbar-nav float-right"> 
                        <li class="nav-item nav"><a href="#" class="btn btn-dark mt-1 mb-1 font-small-3"><i class="fab fa-google-play"></i> Download App!</a></li>
                        <li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
-                                <div class="user-nav"><span class="user-name text-bold-300">Akses APP!</span><span class="user-status text-bold-600">Now!</span></div><span><img class="round" src="img/<?php echo $a['logo'];?>" height="40" width="40"></span>
+                                <div class="user-nav"><span class="user-name text-bold-300">Akses APP!</span><span class="user-status text-bold-600">Now!</span></div><span><img class="round" src="img/toko/<?php echo $a['logo'];?>" height="40" width="40"></span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
                             	<a class="dropdown-item" href="aut/login.php"><i class="fas fa-user-lock"></i> Login!</a>
@@ -115,7 +115,7 @@
             <div class="navbar-header">
                 <ul class="nav navbar-nav flex-row">
                     <li class="nav-item mr-auto"><a class="navbar-brand" href="../">
-                            <img src="img/<?php echo $a['logo'];?>" height="30" />
+                            <img src="img/toko/<?php echo $a['logo'];?>" height="30" />
                         </a></li>
                     <li class="nav-item nav-toggle"><a class="nav-link modern-nav-toggle pr-0" data-toggle="collapse"><i class="feather icon-x d-block d-xl-none font-medium-4 dark toggle-icon"></i><i class="toggle-icon feather icon-disc font-medium-4 d-none d-xl-block collapse-toggle-icon primary" data-ticon="icon-disc"></i></a></li>
                 </ul>
