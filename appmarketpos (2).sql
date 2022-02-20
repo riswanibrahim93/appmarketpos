@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 20 Feb 2022 pada 05.06
+-- Waktu pembuatan: 20 Feb 2022 pada 10.50
 -- Versi server: 10.4.14-MariaDB
 -- Versi PHP: 7.4.11
 
@@ -210,6 +210,29 @@ CREATE TABLE `tabel_kategori_info` (
 INSERT INTO `tabel_kategori_info` (`kd_kategori_info`, `nm_kategori_info`) VALUES
 (1, 'kaos'),
 (2, 'hhjb');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `tabel_medsos_toko`
+--
+
+CREATE TABLE `tabel_medsos_toko` (
+  `id` int(11) NOT NULL,
+  `id_toko` varchar(225) NOT NULL,
+  `twitter` varchar(225) DEFAULT NULL,
+  `facebook` varchar(225) DEFAULT NULL,
+  `google` varchar(225) DEFAULT NULL,
+  `tiktok` varchar(225) DEFAULT NULL,
+  `instagram` varchar(225) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `tabel_medsos_toko`
+--
+
+INSERT INTO `tabel_medsos_toko` (`id`, `id_toko`, `twitter`, `facebook`, `google`, `tiktok`, `instagram`) VALUES
+(3, '123', 'rfkw', 'jfnjk', ',ngfj', 'dkfg', 'ekrh');
 
 -- --------------------------------------------------------
 
@@ -1355,7 +1378,7 @@ CREATE TABLE `tabel_toko` (
 --
 
 INSERT INTO `tabel_toko` (`kd_toko`, `nm_toko`, `almt_toko`, `kota_toko`, `kecamatan_toko`, `tlp_toko`, `fax_toko`, `logo`, `password`, `pass`, `status`, `tipe`, `headerfooter`, `background`, `tombol`) VALUES
-('123', 'Ovent', 'Jl.Simp. Grajakan Blok III/20 Pandanwangi', 'Malang', 'Blimbing', '', '', 'logo.png', 'e9af23dd5a45126ff689eba7bb2146bb', '123', '', '', '#1F0001', '#FF9F21', '#FF9F43');
+('123', 'Ovent ejnejk', 'Jl.Simp. Grajakan Blok III/20 Pandanwangi ljelijwd', 'Malang efjwje', 'Blimbing fehiu', '', '', '6211d0ef0271d.jpg', '757f9d5b09cfd69699c86364746ad68e', '123456', '', '', '#1F0001', '#FF9F21', '#FF9F43');
 
 --
 -- Indexes for dumped tables
@@ -1408,6 +1431,12 @@ ALTER TABLE `tabel_kategori_barang`
 --
 ALTER TABLE `tabel_kategori_info`
   ADD PRIMARY KEY (`kd_kategori_info`) USING BTREE;
+
+--
+-- Indeks untuk tabel `tabel_medsos_toko`
+--
+ALTER TABLE `tabel_medsos_toko`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indeks untuk tabel `tabel_member`
@@ -1526,6 +1555,12 @@ ALTER TABLE `tabel_kategori_barang`
 --
 ALTER TABLE `tabel_kategori_info`
   MODIFY `kd_kategori_info` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT untuk tabel `tabel_medsos_toko`
+--
+ALTER TABLE `tabel_medsos_toko`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT untuk tabel `tabel_member`

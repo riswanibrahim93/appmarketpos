@@ -1,148 +1,155 @@
 <!-- BEGIN: Content-->
-   <div class="app-content content">
-      <div class="content-overlay"></div>
-      <div class="header-navbar-shadow"></div>
-        <div class="content-wrapper">
-            <div class="content-header row">
-                <div class="content-header-left col-md-9 col-12 mb-2">
-                    <div class="row breadcrumbs-top">
-                        <div class="col-12">
-                            <h2 class="content-header-title float-left mb-0 text-dark text-capitalize"><?php echo $_SESSION['akses'];?></h2>
-                            <div class="breadcrumb-wrapper col-12">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="index.php?menu=home" class="text-dark">Home</a>
-                                    </li>
-                                    <li class="breadcrumb-item"><a href="#" class="text-dark">Saldo</a>
-                                    </li>                                   
-                                </ol>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+  <div class="app-content content">
+    <div class="content-overlay"></div>
+    <div class="header-navbar-shadow"></div>
+    <div class="content-wrapper">
+      <div class="content-header row">
+          <div class="content-header-left col-md-9 col-12 mb-2">
+              <div class="row breadcrumbs-top">
+                  <div class="col-12">
+                      <h2 class="content-header-title float-left mb-0 text-dark text-capitalize"><?php echo $_SESSION['akses'];?></h2>
+                      <div class="breadcrumb-wrapper col-12">
+                          <ol class="breadcrumb">
+                              <li class="breadcrumb-item"><a href="index.php?menu=home" class="text-dark">Home</a>
+                              </li>
+                              <li class="breadcrumb-item"><a href="#" class="text-dark">Saldo</a>
+                              </li>                                   
+                          </ol>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
 
-<div class="card">
- <div class="card-body">
-  <div class="divider">
-    <div class="divider-text"><h3 class="mb-3 display-4 text-uppercase">Saldo</h3></div>
-   </div>
-   <div class="row">
-  	<div class="col-lg-5 col-12 pb-5">        
-        <form method="post" action="" enctype="multipart/form-data">
-            <div class="row">
-                <div class="col-12 pb-1">
-                  <div class="font-small-2 mb-1 mt-1">Member</div>            
-                      <select name="kategori" class="form-control select2">
-                            <option disabled selected>Pilih Member</option>
-            <?php error_reporting(0);           
-               $ketQuery = "SELECT * FROM tabel_member WHERE akses !='admin' ORDER BY nm_user ASC";
-               $executeSat = mysqli_query($koneksi, $ketQuery);
-               while ($k=mysqli_fetch_array($executeSat)) {
-            ?> 
-                        <option value="<?php echo $k['id_user'];?>"><?php echo $k['nm_user'];?></option>
-                               <?php } ?>
-                     </select>
-                 </div>
-                
-                <div class="col-12 pb-1">
-                  <div class="font-small-2 mb-1">Tanggal</div>
-                    <fieldset>
-                        <div class="input-group">
-                             <input type="text" class="form-control pickadate">
-                                <div class="input-group-append" id="button-addon2">
-                                   <button class="btn btn-primary rounded-0" type="button">
-                                   <i class="far fa-calendar-alt"></i></button>
-                                </div>
+      <div class="card">
+        <div class="card-body">
+          <div class="divider">
+            <div class="divider-text"><h3 class="mb-3 display-4 text-uppercase">Saldo</h3></div>
+          </div>
+          <div class="row">
+            <div class="col-lg-5 col-12 pb-5">        
+              <form method="post" action="" enctype="multipart/form-data">
+                  <div class="row">
+                      <div class="col-12 pb-1">
+                        <div class="font-small-2 mb-1 mt-1">Member</div>            
+                            <select name="kategori" class="form-control select2">
+                                  <option disabled selected>Pilih Member</option>
+                          <?php error_reporting(0);           
+                             $ketQuery = "SELECT * FROM tabel_member WHERE akses !='admin' ORDER BY nm_user ASC";
+                             $executeSat = mysqli_query($koneksi, $ketQuery);
+                             while ($k=mysqli_fetch_array($executeSat)) {
+                          ?> 
+                              <option value="<?php echo $k['id_user'];?>"><?php echo $k['nm_user'];?></option>
+                                     <?php } ?>
+                           </select>
+                      </div>
+                      
+                      <div class="col-12 pb-1">
+                        <div class="font-small-2 mb-1">Tanggal</div>
+                          <fieldset>
+                              <div class="input-group">
+                                   <input type="text" class="form-control pickadate">
+                                      <div class="input-group-append" id="button-addon2">
+                                         <button class="btn btn-primary rounded-0" type="button">
+                                         <i class="far fa-calendar-alt"></i></button>
+                                      </div>
+                                   </div>
+                            </fieldset>
+                      </div> 
+                       
+                      <div class="col-12 col-md-12">
+                       <div class="font-small-2 mb-1">Nominal</div>
+                           <fieldset class="form-group position-relative has-icon-left input-divider-left">
+                              <input type="text" name="" class="form-control" placeholder="Isi disini" />
+                               <small class="counter-value float-right"><span class="char-count">Tanpa titik dan Rupiah</span></small>
+                           <div class="form-control-position"><i class="feather icon-clipboard"></i>
+                         </div>
+                        </fieldset>
+                      </div>      
+                        
+                      <div class="col-12">
+                        <div class="font-small-2 mb-1">Bukti Transfer</div>
+                          <fieldset class="form-group">
+                             <div class="custom-file">
+                                <input type="file" class="custom-file-input" name="" id="image">
+                                  <label class="custom-file-label" for="image">Choose file</label>
                              </div>
-                      </fieldset>
-                  </div> 
-                 
-                <div class="col-12 col-md-12">
-                 <div class="font-small-2 mb-1">Nominal</div>
-                     <fieldset class="form-group position-relative has-icon-left input-divider-left">
-                        <input type="text" name="" class="form-control" placeholder="Isi disini" />
-                         <small class="counter-value float-right"><span class="char-count">Tanpa titik dan Rupiah</span></small>
-                     <div class="form-control-position"><i class="feather icon-clipboard"></i>
-                   </div>
-                  </fieldset>
-              </div>      
+                           </fieldset>
+                      </div>            
+                     
                   
-                <div class="col-12">
-                  <div class="font-small-2 mb-1">Bukti Transfer</div>
-                    <fieldset class="form-group">
-                       <div class="custom-file">
-                          <input type="file" class="custom-file-input" name="" id="image">
-                            <label class="custom-file-label" for="image">Choose file</label>
-                       </div>
-                     </fieldset>
-                  </div>            
-               
-            
-                <div class="col-12 mt-1 mb-2">
-                  <div class="font-small-2 mb-1">Keterangan</div>
-                   <fieldset class="form-label-group mb-0">
-                     <textarea data-length=100 class="form-control char-textarea" rows="3" name="">Isi disini</textarea>
-                   </fieldset>
-                   <small class="counter-value float-right"><span class="char-count">maks.</span> / 100 karakter</small>
-                 </div>        
+                      <div class="col-12 mt-1 mb-2">
+                        <div class="font-small-2 mb-1">Keterangan</div>
+                         <fieldset class="form-label-group mb-0">
+                           <textarea data-length=100 class="form-control char-textarea" rows="3" name="">Isi disini</textarea>
+                         </fieldset>
+                         <small class="counter-value float-right"><span class="char-count">maks.</span> / 100 karakter</small>
+                      </div>        
+                      
+                      <div class="col-12 mt-1 mb-2">
+                        <input type="submit" name="" value="Upload" class="btn btn-primary rounded-0" />
+                        <input type="reset" name="" value="Cancel" onClick="hide(0)" class="btn btn-danger rounded-0" />
+                      </div>
+                  </div>          
+              </form>
+            </div>
+           	<div class="col-lg-7 col-12">
+              <div class="badge badge-primary float-right">
+                <?php 
+                  $sql_user = mysqli_query($koneksi,"SELECT * FROM tabel_saldo"); 
+                  $jumlah_user = mysqli_num_rows($sql_user); 
+                ?>
+                <span class="badge badge-pill badge-up badge-danger font-small-2 mr-2">
+                  <?php echo $jumlah_user; ?>    
+                </span>
+                Total Saldo 
+              </div> 
+                <div class="table-responsive">
+                  <table class="table table-striped dataex-html5-selectors">
+                    <thead>
+                      <tr>
+                         <th>Member</th>
+                         <th>Saldo</th>
+                         <th>Topup</th>                                                                
+                         <th>Edit</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <?php            
+                         $ketQuery = "SELECT * FROM tabel_saldo, tabel_member WHERE tabel_saldo.id_user = tabel_member.id_user";
+                         $executeSat = mysqli_query($koneksi, $ketQuery);
+                         while ($b=mysqli_fetch_array($executeSat)) {
+                      ?>                                  
+                       <tr>
+                         <td><?php echo $b['nm_user'] ?></td>
+                         <<td>Rp.<?php echo number_format($b['jumlah'],0,",","."); ?></td>
+                         <td><?php echo $b['tanggal'] ?></td>                                  
+                         <td>
+                         		<a href="#" data-toggle="modal" data-target="#ad">
+                              	<i class="fas fa-edit"></i></a>
+                              <a class="action-delete"><i class="fas fa-trash-alt"></i></a>
+                         </td>
+                       </tr>
+                         <?php } ?>                                                  
+                    </tbody>
+                    <tfoot>
+                       <tr>
+                           <th>Member</th>
+                           <th>Saldo</th>
+                           <th>Topup</th>                                                                
+                           <th>Edit</th>
+                       </tr>
+                    </tfoot>
+                  </table>
+                </div>
                 
-                <div class="col-12 mt-1 mb-2">
-                <input type="submit" name="" value="Upload" class="btn btn-primary rounded-0" />
-                <input type="reset" name="" value="Cancel" onClick="hide(0)" class="btn btn-danger rounded-0" />
-               </div>
-               </form>
-           </div>          
+            </div>
+          </div>  
+        <!-- END: Content-->
+        </div>
+      </div> 
     </div>
- 	<div class="col-lg-7 col-12">
-     <div class="badge badge-primary float-right">
-      <?php $sql_user = mysqli_query($koneksi,"SELECT * FROM tabel_saldo"); $jumlah_user = mysqli_num_rows($sql_user); ?>
-         <span class="badge badge-pill badge-up badge-danger font-small-2 mr-2">
-		 <?php echo $jumlah_user?></span>Total Saldo 
-     </div> 
-      <div class="table-responsive">
-                        <table class="table table-striped dataex-html5-selectors">
-                           <thead>
-                             <tr>
-                                 <th>Member</th>
-                                 <th>Saldo</th>
-                                 <th>Topup</th>                                                                
-                                 <th>Edit</th>
-                               </tr>
-                              </thead>
-                              <tbody>
-<?php            
-   $ketQuery = "SELECT * FROM tabel_saldo, tabel_member WHERE tabel_saldo.id_user = tabel_member.id_user";
-   $executeSat = mysqli_query($koneksi, $ketQuery);
-   while ($b=mysqli_fetch_array($executeSat)) {
-?>                                  
-                                 <tr>
-                                   <td><?php echo $b['nm_user'] ?></td>
-                                   <<td>Rp.<?php echo number_format($b['jumlah'],0,",","."); ?></td>
-                                   <td><?php echo $b['tanggal'] ?></td>                                  
-                                   <td>
-                                   		<a href="#" data-toggle="modal" data-target="#ad">
-                                        	<i class="fas fa-edit"></i></a>
-                                        <a class="action-delete"><i class="fas fa-trash-alt"></i></a>
-                                   </td>
-                                 </tr>
-                                   <?php } ?>                                                  
-                               </tbody>
-                               <tfoot>
-                                 <tr>
-                                     <th>Member</th>
-                                     <th>Saldo</th>
-                                     <th>Topup</th>                                                                
-                                     <th>Edit</th>
-                                 </tr>
-                                </tfoot>
-                             </table>
-                          </div>
-      
-    </div>
-   </div>  
-<!-- END: Content-->
- </div>
-</div> 
+  </div>
 
 <!---------------------------------------- Modal Kategori ------------------------------------>
 <div class="modal fade text-left" id="kategori" tabindex="-1" role="dialog" aria-labelledby="myModalLabel20" aria-hidden="true">

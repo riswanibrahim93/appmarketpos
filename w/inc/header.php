@@ -13,7 +13,7 @@
                         </ul>
                         <ul class="nav navbar-nav bookmark-icons"> 
                             
-                            <li class="nav-item d-none d-lg-block"><a href="index.php?menu=home"><img src="../img/<?php echo $logo;?>" width="40" height="40" /></a></li>                            
+                            <li class="nav-item d-none d-lg-block"><a href="index.php?menu=home"><img src="../img/toko/<?php echo $logo;?>" width="40" height="40" /></a></li>                            
                         </ul>                        
                     </div>
                     <ul class="nav navbar-nav float-right">                              
