@@ -32,9 +32,9 @@
           <div class="col-lg-5 col-12 pb-5">
             <form method="post" action="../aksi/add_info.php" enctype="multipart/form-data">
               <div class="row">
-                  <div class="col-12 col-md-12 text-right">
+                  <!-- <div class="col-12 col-md-12 text-right">
                     <button class="btn btn-primary" style="border-radius: 20%;" type="button" onclick="location.reload()">Refresh</button>
-                  </div>
+                  </div> -->
                 <div class="col-12 pb-1">
                   <div class="font-small-2 mb-1">Judul</div>
                   <fieldset>
