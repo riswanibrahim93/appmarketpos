@@ -74,10 +74,10 @@ if(isset($_POST['upload_edit_product'])){
 			}
 
 			// cek ukuran
-			if($image_size[$i] > 100000){
-				echo "<script>alert('Ukuran Image Harus < 1 Mb');history.back()</script>";
-				return false;
-			}
+			// if($image_size[$i] > 100000){
+			// 	echo "<script>alert('Ukuran Image Harus < 1 Mb');history.back()</script>";
+			// 	return false;
+			// }
 		}
 		else{
 			if($_POST['cek_hapus'.$index_img] == '1'){

@@ -63,16 +63,16 @@ if(isset($_POST['upload_product'])){
 		}
 
 		// cek ukuran
-		if($image_size[$i] > 100000){
-			echo "<script>alert('Ukuran Image Harus < 1 Mb');history.back()</script>";
-			return false;
-		}
+		// if($image_size[$i] > 100000){
+		// 	echo "<script>alert('Ukuran Image Harus < 1 Mb');history.back()</script>";
+		// 	return false;
+		// }
 	}
 	// cek image
-	if($image_error[0] === 4 && $image_error[1] === 4 && $image_error[2] === 4){
-		echo "<script>alert('Tambah Image Kategori');history.back()</script>";
-		return false;
-	}
+	// if($image_error[0] === 4 && $image_error[1] === 4 && $image_error[2] === 4){
+	// 	echo "<script>alert('Tambah Image Kategori');history.back()</script>";
+	// 	return false;
+	// }
 
 	$images = substr($images, 0, -1);
 	var_dump($images);
