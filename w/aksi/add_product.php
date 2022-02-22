@@ -2,7 +2,8 @@
 session_start();
 include '../inc/koneksi.php';
 // var_dump($_POST);
-var_dump($_FILES);
+// var_dump($_FILES);
+// die;
 
 
 if(isset($_POST['upload_product'])){
@@ -55,18 +56,31 @@ if(isset($_POST['upload_product'])){
 			$image_name_new[$i] .= $ekstensiGambar;
 
 			// simpan gambar
-			move_uploaded_file($image_tmp[$i], '../img/produk/'.$image_name_new[$i]);
+			$dest = '../img/produk/'.$image_name_new[$i];
+			move_uploaded_file($image_tmp[$i], $dest);
 			$images .= $image_name_new[$i].',';
+
+			// cek ukuran
+			if($image_size[$i] > 50000){
+				list($lebar, $tinggi) = getimagesize($dest);
+				if($ekstensiGambar == 'png'){
+					$file_baru = imagecreatefrompng($dest);
+					$warna_baru = imagecreatetruecolor($lebar, $tinggi);
+					imagecopyresampled($warna_baru, $file_baru, 0, 0, 0, 0, $lebar, $tinggi, $lebar, $tinggi);
+					imagepng($warna_baru, $dest, 9);
+				}
+				else{
+					$file_baru = imagecreatefromjpeg($dest);
+					$warna_baru = imagecreatetruecolor($lebar, $tinggi);
+					imagecopyresampled($warna_baru, $file_baru, 0, 0, 0, 0, $lebar, $tinggi, $lebar, $tinggi);
+					imagejpeg($warna_baru, $dest, 10);
+				}
+			}
 		}
 		else{
 			$images .= 'kosong,';
 		}
 
-		// cek ukuran
-		// if($image_size[$i] > 100000){
-		// 	echo "<script>alert('Ukuran Image Harus < 1 Mb');history.back()</script>";
-		// 	return false;
-		// }
 	}
 	// cek image
 	// if($image_error[0] === 4 && $image_error[1] === 4 && $image_error[2] === 4){
@@ -75,8 +89,8 @@ if(isset($_POST['upload_product'])){
 	// }
 
 	$images = substr($images, 0, -1);
-	var_dump($images);
- die;
+	// var_dump($images);
+ // die;
 
 
 
@@ -138,10 +152,10 @@ if(isset($_POST['upload_product'])){
 		return false;
 	}
 	$harga_grosir = $_POST['harga_grosir'];
-	if(!$harga_grosir){
-		echo "<script>alert('Tambah harga_grosir');history.back()</script>";
-		return false;
-	}
+	// if(!$harga_grosir){
+	// 	echo "<script>alert('Tambah harga_grosir');history.back()</script>";
+	// 	return false;
+	// }
 	$deskripsi = $_POST['deskripsi'];
 	if(!$deskripsi){
 		echo "<script>alert('Tambah deskripsi');history.back()</script>";
@@ -153,10 +167,10 @@ if(isset($_POST['upload_product'])){
 
 
 	$stok = $_POST['stok'];
-	if(!$stok){
-		echo "<script>alert('Tambah stok');history.back()</script>";
-		return false;
-	}
+	// if(!$stok){
+	// 	echo "<script>alert('Tambah stok');history.back()</script>";
+	// 	return false;
+	// }
 
 	$query_tabel_barang = "INSERT INTO tabel_barang values('$kode', '$nama', '$satuan', '$kategori', '$kd_toko', '$deskripsi', '$panjang', '$lebar', '$tinggi', '$warna', '$type', '$merk', '$harga_beli', '$harga_grosir', '$harga_jual', '$diskon', '$hrg_jual_disk')";
 	$hasil_tabel_barang=mysqli_query($koneksi,$query_tabel_barang);

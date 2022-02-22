@@ -147,10 +147,10 @@ if(isset($_POST['upload_edit_product'])){
 		return false;
 	}
 	$harga_grosir = $_POST['harga_grosir'];
-	if(!$harga_grosir){
-		echo "<script>alert('Tambah harga_grosir');history.back()</script>";
-		return false;
-	}
+	// if(!$harga_grosir){
+	// 	echo "<script>alert('Tambah harga_grosir');history.back()</script>";
+	// 	return false;
+	// }
 	$deskripsi = $_POST['deskripsi'];
 	if(!$deskripsi){
 		echo "<script>alert('Tambah deskripsi');history.back()</script>";
@@ -162,10 +162,10 @@ if(isset($_POST['upload_edit_product'])){
 
 
 	$stok = $_POST['stok'];
-	if(!$stok){
-		echo "<script>alert('Tambah stok');history.back()</script>";
-		return false;
-	}
+	// if(!$stok){
+	// 	echo "<script>alert('Tambah stok');history.back()</script>";
+	// 	return false;
+	// }
 
 	// var_dump($images);
 	// die;
