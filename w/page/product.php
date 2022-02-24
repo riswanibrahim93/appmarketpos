@@ -229,18 +229,18 @@
               </tr>
            </thead>
            <tbody>
-<?php            
-   $ketQuery = "SELECT * FROM tabel_barang, tabel_stok_toko, tabel_barang_gambar WHERE tabel_barang.kd_barang = tabel_barang_gambar.id_brg AND tabel_barang.kd_barang = tabel_stok_toko.kd_barang";
-   $executeSat = mysqli_query($koneksi, $ketQuery);
-   while ($b=mysqli_fetch_array($executeSat)) {
-    
-    $id_satuan = $b['kd_satuan'];
-    $querySatuan = "SELECT * FROM `tabel_satuan_barang` WHERE id_satuan = '$id_satuan'";
-    $hasilSatuan = mysqli_fetch_array(mysqli_query($koneksi, $querySatuan));
-    // var_dump($hasilSatuan);
-    // die;
+                                <?php            
+                                   $ketQuery = "SELECT * FROM tabel_barang, tabel_stok_toko, tabel_barang_gambar WHERE tabel_barang.kd_barang = tabel_barang_gambar.id_brg AND tabel_barang.kd_barang = tabel_stok_toko.kd_barang";
+                                   $executeSat = mysqli_query($koneksi, $ketQuery);
+                                   while ($b=mysqli_fetch_array($executeSat)) {
+                                    
+                                    $id_satuan = $b['kd_satuan'];
+                                    $querySatuan = "SELECT * FROM `tabel_satuan_barang` WHERE id_satuan = '$id_satuan'";
+                                    $hasilSatuan = mysqli_fetch_array(mysqli_query($koneksi, $querySatuan));
+                                    // var_dump($hasilSatuan);
+                                    // die;
 
-?>                                  
+                                ?>                                  
                                  <tr>
                                    <td><?php echo $b['kd_barang'] ?></td>
                                    <td class="text-capitalize"><?php echo $b['nm_barang'] ?></td>
@@ -252,9 +252,9 @@
                                    <td>
                                    		<!-- <a href="#" data-toggle="modal" data-target="#produk<?php echo $b['kd_barang'] ?>"> -->
                                       <!-- <a href="index.php?menu=edit_product"> -->
-                                        <a onclick="show(<?php echo $b['kd_barang'] ?>)">
+                                        <a onclick="show(`<?php echo $b['kd_barang'] ?>`)">
                                         	<i class="fas fa-edit"></i></a>
-                                        <a class="action-delete" onclick="deleteImage('<?php echo $b['kd_barang'] ?>')"><i class="fas fa-trash-alt"></i></a>
+                                        <a class="action-delete" onclick="deleteImage(`<?php echo $b['kd_barang'] ?>`)"><i class="fas fa-trash-alt"></i></a>
                                    </td>
                                  </tr>
                                    <?php } ?>                                                  
@@ -276,8 +276,8 @@
       
     </div>
    </div>  
-<!-- END: Content-->
- </div>
+  <!-- END: Content-->
+  </div>
 </div> 
 
 <!---------------------------------------- Modal Kategori ------------------------------------>
@@ -451,6 +451,7 @@
         <div class="modal-body">              
           <div class="row">            
             <input type="text" hidden name="kode" id="kd_barang">
+            <input type="text" hidden name="kd_toko" id="kd_toko">
             <div class="col-12 col-md-12 mt-2 mb-1">
               <div class="font-small-2">Upload Foto terbaik <span class="badge badge-dark">Max.3 (JPG/JPEG/PNG)</span></div>
             </div>
@@ -627,380 +628,383 @@
   //   }, 5000);
   // });
 
-  // let uploadButton1 = document.getElementById("upload-button1");
-  // let chosenImage1 = document.getElementById("chosen-image1");
-  // let uploadButton2 = document.getElementById("upload-button2");
-  // let chosenImage2 = document.getElementById("chosen-image2");
-  // let uploadButton3 = document.getElementById("upload-button3");
-  // let chosenImage3 = document.getElementById("chosen-image3");
+  let uploadButton1 = document.getElementById("upload-button1");
+  let chosenImage1 = document.getElementById("chosen-image1");
+  let uploadButton2 = document.getElementById("upload-button2");
+  let chosenImage2 = document.getElementById("chosen-image2");
+  let uploadButton3 = document.getElementById("upload-button3");
+  let chosenImage3 = document.getElementById("chosen-image3");
 
-  // uploadButton1.onchange = () => {
-  //     let reader = new FileReader();
-  //     reader.readAsDataURL(uploadButton1.files[0]);
-  //     reader.onload = () => {
-  //         chosenImage1.setAttribute("src",reader.result);
-  //     }
-  // }
+  uploadButton1.onchange = () => {
+      let reader = new FileReader();
+      reader.readAsDataURL(uploadButton1.files[0]);
+      reader.onload = () => {
+          chosenImage1.setAttribute("src",reader.result);
+      }
+  }
 
-  // function delete_image1(){
-  //   chosenImage1.setAttribute("src","")
-  // }
+  function delete_image1(){
+    chosenImage1.setAttribute("src","")
+  }
 
-  // uploadButton2.onchange = () => {
-  //     let reader = new FileReader();
-  //     reader.readAsDataURL(uploadButton2.files[0]);
-  //     reader.onload = () => {
-  //         chosenImage2.setAttribute("src",reader.result);
-  //     }
-  // }
+  uploadButton2.onchange = () => {
+      let reader = new FileReader();
+      reader.readAsDataURL(uploadButton2.files[0]);
+      reader.onload = () => {
+          chosenImage2.setAttribute("src",reader.result);
+      }
+  }
 
-  // function delete_image2(){
-  //   chosenImage2.setAttribute("src","")
-  // }
+  function delete_image2(){
+    chosenImage2.setAttribute("src","")
+  }
 
-  // uploadButton3.onchange = () => {
-  //     let reader = new FileReader();
-  //     reader.readAsDataURL(uploadButton3.files[0]);
-  //     reader.onload = () => {
-  //         chosenImage3.setAttribute("src",reader.result);
-  //     }
-  // }
+  uploadButton3.onchange = () => {
+      let reader = new FileReader();
+      reader.readAsDataURL(uploadButton3.files[0]);
+      reader.onload = () => {
+          chosenImage3.setAttribute("src",reader.result);
+      }
+  }
 
-  // function delete_image3(){
-  //   chosenImage3.setAttribute("src","")
-  // }
-
-
-  // let uploadButtonEdit1 = document.getElementById("edit-upload-button1");
-  // let chosenImageEdit1 = document.getElementById("edit-chosen-image1");
-  // let uploadButtonEdit2 = document.getElementById("edit-upload-button2");
-  // let chosenImageEdit2 = document.getElementById("edit-chosen-image2");
-  // let uploadButtonEdit3 = document.getElementById("edit-upload-button3");
-  // let chosenImageEdit3 = document.getElementById("edit-chosen-image3");
-
-  // uploadButtonEdit1.onchange = () => {
-  //     let reader = new FileReader();
-  //     reader.readAsDataURL(uploadButtonEdit1.files[0]);
-  //     reader.onload = () => {
-  //         chosenImageEdit1.setAttribute("src",reader.result);
-  //     }
-  // }
-
-  // function edit_delete_image1(){
-  //   chosenImageEdit1.setAttribute("src","")
-  //   $('#cek_hapus1').val('1');
-  // }
-
-  // uploadButtonEdit2.onchange = () => {
-  //     let reader = new FileReader();
-  //     reader.readAsDataURL(uploadButtonEdit2.files[0]);
-  //     reader.onload = () => {
-  //         chosenImageEdit2.setAttribute("src",reader.result);
-  //     }
-  // }
-
-  // function edit_delete_image2(){
-  //   chosenImageEdit2.setAttribute("src","")
-  //   $('#cek_hapus2').val('1');
-  // }
-
-  // uploadButtonEdit3.onchange = () => {
-  //     let reader = new FileReader();
-  //     reader.readAsDataURL(uploadButtonEdit3.files[0]);
-  //     reader.onload = () => {
-  //         chosenImageEdit3.setAttribute("src",reader.result);
-  //     }
-  // }
-
-  // function edit_delete_image3(){
-  //   chosenImageEdit3.setAttribute("src","")
-  //   $('#cek_hapus3').val('1');
-  // }
+  function delete_image3(){
+    chosenImage3.setAttribute("src","")
+  }
 
 
-  // function pilihVarian() {
-  //   var x = document.getElementById("kategori").value;
-  //   var response = '';
-  //   $.ajax({
-  //       type: "GET",
-  //       url: "../aksi/select_varian_in_kategori.php?id_kategori="+x,
-  //       async: false,
-  //       success: function(text) {
-  //           response = text;
-  //       }
-  //   });
-  //   let text = "";
-  //   let varian = response.replace('"', '');
-  //   varian = varian.replace('"', '');
-  //   varian = varian.split(',');
+  let uploadButtonEdit1 = document.getElementById("edit-upload-button1");
+  let chosenImageEdit1 = document.getElementById("edit-chosen-image1");
+  let uploadButtonEdit2 = document.getElementById("edit-upload-button2");
+  let chosenImageEdit2 = document.getElementById("edit-chosen-image2");
+  let uploadButtonEdit3 = document.getElementById("edit-upload-button3");
+  let chosenImageEdit3 = document.getElementById("edit-chosen-image3");
 
-  //   for (var i = 0; i < varian.length; i++) {
-  //     if(varian[i] == 'panjang')
-  //     {
-  //       text += `<div class="col-6 col-md-4">
-  //           <div class="font-small-2">Panjang</div>
-  //              <fieldset class="form-group position-relative has-icon-left input-divider-left">
-  //                 <input type="text" name="panjang" class="form-control" placeholder="Isi disini" />                     
-  //              <div class="form-control-position"><i class="fas fa-ruler-horizontal"></i>
-  //            </div>
-  //           </fieldset>
-  //         </div>`
-  //     }
-  //     else if(varian[i] == 'lebar')
-  //     {
-  //       text += `<div class="col-6 col-md-4">
-  //           <div class="font-small-2">Lebar</div>
-  //               <fieldset class="form-group position-relative has-icon-left input-divider-left">
-  //                  <input type="text" name="lebar" class="form-control" placeholder="Isi disini" />                     
-  //               <div class="form-control-position"><i class="fas fa-ruler-combined"></i>
-  //              </div>
-  //             </fieldset>
-  //         </div>`
-  //     }
-  //     else if(varian[i] == 'tinggi')
-  //     {
-  //       text += `<div class="col-6 col-md-4">
-  //            <div class="font-small-2">Tinggi</div>
-  //               <fieldset class="form-group position-relative has-icon-left input-divider-left">
-  //                   <input type="text" name="tinggi" class="form-control" placeholder="Isi disini" />                     
-  //                <div class="form-control-position"><i class="fas fa-ruler-vertical"></i>
-  //               </div>
-  //              </fieldset>
-  //         </div>`
-  //     }
-  //     else if(varian[i] == 'warna')
-  //     {
-  //       text += `<div class="col-6 col-md-4">
-  //           <div class="font-small-2">Warna</div>
-  //                <fieldset class="form-group position-relative has-icon-left input-divider-left">
-  //                   <input type="text" name="warna" class="form-control" placeholder="Isi disini" />                     
-  //                <div class="form-control-position"><i class="fas fa-eye-dropper"></i>
-  //              </div>
-  //             </fieldset>
-  //         </div>`
-  //     }
-  //     else if(varian[i] == 'type')
-  //     {
-  //       text += `<div class="col-6 col-md-4">
-  //           <div class="font-small-2">Type</div>
-  //                <fieldset class="form-group position-relative has-icon-left input-divider-left">
-  //                   <input type="text" name="type" class="form-control" placeholder="Isi disini" />                     
-  //                <div class="form-control-position"><i class="fas fa-tag"></i>
-  //              </div>
-  //             </fieldset>
-  //         </div>`
-  //     }
-  //   }
-  //   if(text == "")
-  //   {
-  //     text += `<div class="col-6 col-md-12">
-  //           <p class="text-center"> tidak ada varian </p>
-  //         </div>`
-  //   }
+  uploadButtonEdit1.onchange = () => {
+      let reader = new FileReader();
+      reader.readAsDataURL(uploadButtonEdit1.files[0]);
+      reader.onload = () => {
+          chosenImageEdit1.setAttribute("src",reader.result);
+      }
+  }
 
-  //   $("#varian").html(text);
-  // }
+  function edit_delete_image1(){
+    chosenImageEdit1.setAttribute("src","")
+    $('#cek_hapus1').val('1');
+  }
 
-  // function pilihVarianEdit() {
-  //   var x = document.getElementById("kategori_edit").value;
-  //   var response = '';
-  //   $.ajax({
-  //       type: "GET",
-  //       url: "../aksi/select_varian_in_kategori.php?id_kategori="+x,
-  //       async: false,
-  //       success: function(text) {
-  //           response = text;
-  //       }
-  //   });
-  //   let text = "";
-  //   let varian = response.replace('"', '');
-  //   varian = varian.replace('"', '');
-  //   varian = varian.split(',');
+  uploadButtonEdit2.onchange = () => {
+      let reader = new FileReader();
+      reader.readAsDataURL(uploadButtonEdit2.files[0]);
+      reader.onload = () => {
+          chosenImageEdit2.setAttribute("src",reader.result);
+      }
+  }
 
-  //   for (var i = 0; i < varian.length; i++) {
-  //     if(varian[i] == 'panjang')
-  //     {
-  //       text += `<div class="col-6 col-md-4">
-  //           <div class="font-small-2">Panjang</div>
-  //              <fieldset class="form-group position-relative has-icon-left input-divider-left">
-  //                 <input type="text" name="panjang" class="form-control" placeholder="Isi disini" />                     
-  //              <div class="form-control-position"><i class="fas fa-ruler-horizontal"></i>
-  //            </div>
-  //           </fieldset>
-  //         </div>`
-  //     }
-  //     else if(varian[i] == 'lebar')
-  //     {
-  //       text += `<div class="col-6 col-md-4">
-  //           <div class="font-small-2">Lebar</div>
-  //               <fieldset class="form-group position-relative has-icon-left input-divider-left">
-  //                  <input type="text" name="lebar" class="form-control" placeholder="Isi disini" />                     
-  //               <div class="form-control-position"><i class="fas fa-ruler-combined"></i>
-  //              </div>
-  //             </fieldset>
-  //         </div>`
-  //     }
-  //     else if(varian[i] == 'tinggi')
-  //     {
-  //       text += `<div class="col-6 col-md-4">
-  //            <div class="font-small-2">Tinggi</div>
-  //               <fieldset class="form-group position-relative has-icon-left input-divider-left">
-  //                   <input type="text" name="tinggi" class="form-control" placeholder="Isi disini" />                     
-  //                <div class="form-control-position"><i class="fas fa-ruler-vertical"></i>
-  //               </div>
-  //              </fieldset>
-  //         </div>`
-  //     }
-  //     else if(varian[i] == 'warna')
-  //     {
-  //       text += `<div class="col-6 col-md-4">
-  //           <div class="font-small-2">Warna</div>
-  //                <fieldset class="form-group position-relative has-icon-left input-divider-left">
-  //                   <input type="text" name="warna" class="form-control" placeholder="Isi disini" />                     
-  //                <div class="form-control-position"><i class="fas fa-eye-dropper"></i>
-  //              </div>
-  //             </fieldset>
-  //         </div>`
-  //     }
-  //     else if(varian[i] == 'type')
-  //     {
-  //       text += `<div class="col-6 col-md-4">
-  //           <div class="font-small-2">Type</div>
-  //                <fieldset class="form-group position-relative has-icon-left input-divider-left">
-  //                   <input type="text" name="type" class="form-control" placeholder="Isi disini" />                     
-  //                <div class="form-control-position"><i class="fas fa-tag"></i>
-  //              </div>
-  //             </fieldset>
-  //         </div>`
-  //     }
-  //   }
-  //   if(text == "")
-  //   {
-  //     text += `<div class="col-6 col-md-12">
-  //           <p class="text-center"> tidak ada varian </p>
-  //         </div>`
-  //   }
+  function edit_delete_image2(){
+    chosenImageEdit2.setAttribute("src","")
+    $('#cek_hapus2').val('1');
+  }
 
-  //   $("#varian_edit").html(text);
-  // }
+  uploadButtonEdit3.onchange = () => {
+      let reader = new FileReader();
+      reader.readAsDataURL(uploadButtonEdit3.files[0]);
+      reader.onload = () => {
+          chosenImageEdit3.setAttribute("src",reader.result);
+      }
+  }
 
-  // function deleteImage(id){
-  //   console.log(id);
-  //   $.ajax({
-  //     type: "GET",
-  //     url: "../aksi/delete_produk.php?id_produk="+id,
-  //     async: false,
-  //     success: function(text) {
-  //       alert(text);
-  //     }
-  //   });
-  // }
+  function edit_delete_image3(){
+    chosenImageEdit3.setAttribute("src","")
+    $('#cek_hapus3').val('1');
+  }
 
-  // function show(id) {
-  //   var response = [];
-  //   var gambar = "";
-  //   let text = "";
 
-  //   chosenImageEdit1.setAttribute("src","");
-  //   chosenImageEdit2.setAttribute("src","");
-  //   chosenImageEdit3.setAttribute("src","");
+  function pilihVarian() {
+    var x = document.getElementById("kategori").value;
+    var response = '';
+    $.ajax({
+        type: "GET",
+        url: "../aksi/select_varian_in_kategori.php?id_kategori="+x,
+        async: false,
+        success: function(text) {
+            response = text;
+        }
+    });
+    let text = "";
+    let varian = response.replace('"', '');
+    varian = varian.replace('"', '');
+    varian = varian.split(',');
 
-  //   $('#cek_hapus1').val('');
-  //   $('#cek_hapus2').val('');
-  //   $('#cek_hapus3').val('');
+    for (var i = 0; i < varian.length; i++) {
+      if(varian[i] == 'panjang')
+      {
+        text += `<div class="col-6 col-md-4">
+            <div class="font-small-2">Panjang</div>
+               <fieldset class="form-group position-relative has-icon-left input-divider-left">
+                  <input type="text" name="panjang" class="form-control" placeholder="Isi disini" />                     
+               <div class="form-control-position"><i class="fas fa-ruler-horizontal"></i>
+             </div>
+            </fieldset>
+          </div>`
+      }
+      else if(varian[i] == 'lebar')
+      {
+        text += `<div class="col-6 col-md-4">
+            <div class="font-small-2">Lebar</div>
+                <fieldset class="form-group position-relative has-icon-left input-divider-left">
+                   <input type="text" name="lebar" class="form-control" placeholder="Isi disini" />                     
+                <div class="form-control-position"><i class="fas fa-ruler-combined"></i>
+               </div>
+              </fieldset>
+          </div>`
+      }
+      else if(varian[i] == 'tinggi')
+      {
+        text += `<div class="col-6 col-md-4">
+             <div class="font-small-2">Tinggi</div>
+                <fieldset class="form-group position-relative has-icon-left input-divider-left">
+                    <input type="text" name="tinggi" class="form-control" placeholder="Isi disini" />                     
+                 <div class="form-control-position"><i class="fas fa-ruler-vertical"></i>
+                </div>
+               </fieldset>
+          </div>`
+      }
+      else if(varian[i] == 'warna')
+      {
+        text += `<div class="col-6 col-md-4">
+            <div class="font-small-2">Warna</div>
+                 <fieldset class="form-group position-relative has-icon-left input-divider-left">
+                    <input type="text" name="warna" class="form-control" placeholder="Isi disini" />                     
+                 <div class="form-control-position"><i class="fas fa-eye-dropper"></i>
+               </div>
+              </fieldset>
+          </div>`
+      }
+      else if(varian[i] == 'type')
+      {
+        text += `<div class="col-6 col-md-4">
+            <div class="font-small-2">Type</div>
+                 <fieldset class="form-group position-relative has-icon-left input-divider-left">
+                    <input type="text" name="type" class="form-control" placeholder="Isi disini" />                     
+                 <div class="form-control-position"><i class="fas fa-tag"></i>
+               </div>
+              </fieldset>
+          </div>`
+      }
+    }
+    if(text == "")
+    {
+      text += `<div class="col-6 col-md-12">
+            <p class="text-center"> tidak ada varian </p>
+          </div>`
+    }
 
-  //   $.ajax({
-  //     type: "GET",
-  //     url: "../aksi/show_produk.php?id_produk="+id,
-  //     async: false,
-  //     success: function(text) {
-  //       response = JSON.parse(text);
-  //     }
-  //   });
-  //   console.log(response);
-  //   $('#kd_barang').val(response.barang.kd_barang);
-  //   $('#nm_barang').val(response.barang.nm_barang);
-  //   $('#kategori_edit option[value="'+response.barang.kd_kategori+'"]').prop('selected', true);
-  //   $('#satuan_edit option[value="'+response.barang.kd_satuan+'"]').prop('selected', true);
-  //   $('#merk_edit option[value="'+response.barang.merek+'"]').prop('selected', true);
-  //   $('#stok_edit').val(response.stok.stok);
-  //   $('#harga_beli_edit').val(response.barang.hrg_beli);
-  //   $('#harga_jual_edit').val(response.barang.hrg_jual);
-  //   $('#harga_grosir_edit').val(response.barang.hrg_grosir);
-  //   $('#deskripsi_edit').val(response.barang.deskripsi);
+    $("#varian").html(text);
+  }
 
-  //   if(response.barang.panjang != "")
-  //   {
-  //     text += `<div class="col-6 col-md-4">
-  //         <div class="font-small-2">Panjang</div>
-  //            <fieldset class="form-group position-relative has-icon-left input-divider-left">
-  //               <input type="text" name="panjang" value="${response.barang.panjang}" class="form-control" placeholder="Isi disini" />                     
-  //            <div class="form-control-position"><i class="fas fa-ruler-horizontal"></i>
-  //          </div>
-  //         </fieldset>
-  //       </div>`
-  //   }
-  //   if(response.barang.lebar != "")
-  //   {
-  //     text += `<div class="col-6 col-md-4">
-  //         <div class="font-small-2">Lebar</div>
-  //             <fieldset class="form-group position-relative has-icon-left input-divider-left">
-  //                <input type="text" name="lebar" value="${response.barang.lebar}" class="form-control" placeholder="Isi disini" />                     
-  //             <div class="form-control-position"><i class="fas fa-ruler-combined"></i>
-  //            </div>
-  //           </fieldset>
-  //       </div>`
-  //   }
-  //   if(response.barang.tinggi != "")
-  //   {
-  //     text += `<div class="col-6 col-md-4">
-  //          <div class="font-small-2">Tinggi</div>
-  //             <fieldset class="form-group position-relative has-icon-left input-divider-left">
-  //                 <input type="text" name="tinggi" value="${response.barang.tinggi}" class="form-control" placeholder="Isi disini" />                     
-  //              <div class="form-control-position"><i class="fas fa-ruler-vertical"></i>
-  //             </div>
-  //            </fieldset>
-  //       </div>`
-  //   }
-  //   if(response.barang.warna != "")
-  //   {
-  //     text += `<div class="col-6 col-md-4">
-  //         <div class="font-small-2">Warna</div>
-  //              <fieldset class="form-group position-relative has-icon-left input-divider-left">
-  //                 <input type="text" name="warna" value="${response.barang.warna}" class="form-control" placeholder="Isi disini" />                     
-  //              <div class="form-control-position"><i class="fas fa-eye-dropper"></i>
-  //            </div>
-  //           </fieldset>
-  //       </div>`
-  //   }
-  //   if(response.barang.tipe != "")
-  //   {
-  //     text += `<div class="col-6 col-md-4">
-  //         <div class="font-small-2">Type</div>
-  //              <fieldset class="form-group position-relative has-icon-left input-divider-left">
-  //                 <input type="text" name="type" value="${response.barang.tipe}" class="form-control" placeholder="Isi disini" />                     
-  //              <div class="form-control-position"><i class="fas fa-tag"></i>
-  //            </div>
-  //           </fieldset>
-  //       </div>`
-  //   }
-  //   $("#varian_edit").html(text);
-  //   gambar = response.gambar.gambar
-  //   gambar = gambar.split(',');
-  //   console.log(gambar[2]);
+  function pilihVarianEdit() {
+    var x = document.getElementById("kategori_edit").value;
+    var response = '';
+    $.ajax({
+        type: "GET",
+        url: "../aksi/select_varian_in_kategori.php?id_kategori="+x,
+        async: false,
+        success: function(text) {
+            response = text;
+        }
+    });
+    let text = "";
+    let varian = response.replace('"', '');
+    varian = varian.replace('"', '');
+    varian = varian.split(',');
 
-  //   if(gambar[0] != "kosong"){
-  //     chosenImageEdit1.setAttribute("src","../img/produk/"+gambar[0]);
+    for (var i = 0; i < varian.length; i++) {
+      if(varian[i] == 'panjang')
+      {
+        text += `<div class="col-6 col-md-4">
+            <div class="font-small-2">Panjang</div>
+               <fieldset class="form-group position-relative has-icon-left input-divider-left">
+                  <input type="text" name="panjang" class="form-control" placeholder="Isi disini" />                     
+               <div class="form-control-position"><i class="fas fa-ruler-horizontal"></i>
+             </div>
+            </fieldset>
+          </div>`
+      }
+      else if(varian[i] == 'lebar')
+      {
+        text += `<div class="col-6 col-md-4">
+            <div class="font-small-2">Lebar</div>
+                <fieldset class="form-group position-relative has-icon-left input-divider-left">
+                   <input type="text" name="lebar" class="form-control" placeholder="Isi disini" />                     
+                <div class="form-control-position"><i class="fas fa-ruler-combined"></i>
+               </div>
+              </fieldset>
+          </div>`
+      }
+      else if(varian[i] == 'tinggi')
+      {
+        text += `<div class="col-6 col-md-4">
+             <div class="font-small-2">Tinggi</div>
+                <fieldset class="form-group position-relative has-icon-left input-divider-left">
+                    <input type="text" name="tinggi" class="form-control" placeholder="Isi disini" />                     
+                 <div class="form-control-position"><i class="fas fa-ruler-vertical"></i>
+                </div>
+               </fieldset>
+          </div>`
+      }
+      else if(varian[i] == 'warna')
+      {
+        text += `<div class="col-6 col-md-4">
+            <div class="font-small-2">Warna</div>
+                 <fieldset class="form-group position-relative has-icon-left input-divider-left">
+                    <input type="text" name="warna" class="form-control" placeholder="Isi disini" />                     
+                 <div class="form-control-position"><i class="fas fa-eye-dropper"></i>
+               </div>
+              </fieldset>
+          </div>`
+      }
+      else if(varian[i] == 'type')
+      {
+        text += `<div class="col-6 col-md-4">
+            <div class="font-small-2">Type</div>
+                 <fieldset class="form-group position-relative has-icon-left input-divider-left">
+                    <input type="text" name="type" class="form-control" placeholder="Isi disini" />                     
+                 <div class="form-control-position"><i class="fas fa-tag"></i>
+               </div>
+              </fieldset>
+          </div>`
+      }
+    }
+    if(text == "")
+    {
+      text += `<div class="col-6 col-md-12">
+            <p class="text-center"> tidak ada varian </p>
+          </div>`
+    }
 
-  //   }
-  //   if(gambar[1] != "kosong"){
-  //     chosenImageEdit2.setAttribute("src","../img/produk/"+gambar[1]);
+    $("#varian_edit").html(text);
+  }
 
-  //   }
-  //   if(gambar[2] != "kosong"){
-  //     chosenImageEdit3.setAttribute("src","../img/produk/"+gambar[2]);
-  //   }
-  //   $("#modal_produk").modal('show');
-  // }
+  function deleteImage(id){
+    console.log(id);
+    $.ajax({
+      type: "GET",
+      url: "../aksi/delete_produk.php?id_produk="+id,
+      async: false,
+      success: function(text) {
+        alert(text);
+      }
+    });
+  }
+
+  function show(id) {
+    var response = [];
+    var gambar = "";
+    let text = "";
+
+    chosenImageEdit1.setAttribute("src","");
+    chosenImageEdit2.setAttribute("src","");
+    chosenImageEdit3.setAttribute("src","");
+
+    $('#cek_hapus1').val('');
+    $('#cek_hapus2').val('');
+    $('#cek_hapus3').val('');
+
+    $.ajax({
+      type: "GET",
+      url: "../aksi/show_produk.php?id_produk="+id,
+      async: false,
+      success: function(text) {
+        response = JSON.parse(text);
+      }
+    });
+    console.log(response);
+    $('#kd_barang').val(response.barang.kd_barang);
+    $('#kd_toko').val(response.barang.kd_toko);
+    $('#nm_barang').val(response.barang.nm_barang);
+    $('#kategori_edit option[value="'+response.barang.kd_kategori+'"]').prop('selected', true);
+    $('#satuan_edit option[value="'+response.barang.kd_satuan+'"]').prop('selected', true);
+    $('#merk_edit option[value="'+response.barang.merek+'"]').prop('selected', true);
+    $('#stok_edit').val(response.stok.stok);
+    $('#harga_beli_edit').val(response.barang.hrg_beli);
+    $('#harga_jual_edit').val(response.barang.hrg_jual);
+    $('#harga_grosir_edit').val(response.barang.hrg_grosir);
+    $('#deskripsi_edit').val(response.barang.deskripsi);
+
+    if(response.barang.panjang != "")
+    {
+      text += `<div class="col-6 col-md-4">
+          <div class="font-small-2">Panjang</div>
+             <fieldset class="form-group position-relative has-icon-left input-divider-left">
+                <input type="text" name="panjang" value="${response.barang.panjang}" class="form-control" placeholder="Isi disini" />                     
+             <div class="form-control-position"><i class="fas fa-ruler-horizontal"></i>
+           </div>
+          </fieldset>
+        </div>`
+    }
+    if(response.barang.lebar != "")
+    {
+      text += `<div class="col-6 col-md-4">
+          <div class="font-small-2">Lebar</div>
+              <fieldset class="form-group position-relative has-icon-left input-divider-left">
+                 <input type="text" name="lebar" value="${response.barang.lebar}" class="form-control" placeholder="Isi disini" />                     
+              <div class="form-control-position"><i class="fas fa-ruler-combined"></i>
+             </div>
+            </fieldset>
+        </div>`
+    }
+    if(response.barang.tinggi != "")
+    {
+      text += `<div class="col-6 col-md-4">
+           <div class="font-small-2">Tinggi</div>
+              <fieldset class="form-group position-relative has-icon-left input-divider-left">
+                  <input type="text" name="tinggi" value="${response.barang.tinggi}" class="form-control" placeholder="Isi disini" />                     
+               <div class="form-control-position"><i class="fas fa-ruler-vertical"></i>
+              </div>
+             </fieldset>
+        </div>`
+    }
+    if(response.barang.warna != "")
+    {
+      text += `<div class="col-6 col-md-4">
+          <div class="font-small-2">Warna</div>
+               <fieldset class="form-group position-relative has-icon-left input-divider-left">
+                  <input type="text" name="warna" value="${response.barang.warna}" class="form-control" placeholder="Isi disini" />                     
+               <div class="form-control-position"><i class="fas fa-eye-dropper"></i>
+             </div>
+            </fieldset>
+        </div>`
+    }
+    if(response.barang.tipe != "")
+    {
+      text += `<div class="col-6 col-md-4">
+          <div class="font-small-2">Type</div>
+               <fieldset class="form-group position-relative has-icon-left input-divider-left">
+                  <input type="text" name="type" value="${response.barang.tipe}" class="form-control" placeholder="Isi disini" />                     
+               <div class="form-control-position"><i class="fas fa-tag"></i>
+             </div>
+            </fieldset>
+        </div>`
+    }
+    $("#varian_edit").html(text);
+    gambar = response.gambar.gambar
+    gambar = gambar.split(',');
+    console.log(gambar[2]);
+
+    if(gambar[0] != "kosong"){
+      chosenImageEdit1.setAttribute("src","../img/produk/"+gambar[0]);
+
+    }
+    if(gambar[1] != "kosong"){
+      chosenImageEdit2.setAttribute("src","../img/produk/"+gambar[1]);
+
+    }
+    if(gambar[2] != "kosong"){
+      chosenImageEdit3.setAttribute("src","../img/produk/"+gambar[2]);
+    }
+    $("#modal_produk").modal('show');
+  }
+
+
   
 </script>

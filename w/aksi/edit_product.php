@@ -156,7 +156,7 @@ if(isset($_POST['upload_edit_product'])){
 		echo "<script>alert('Tambah deskripsi');history.back()</script>";
 		return false;
 	}
-	$kd_toko = "";
+	$kd_toko = $_SESSION['kd_toko'];
 	$diskon = "";
 	$hrg_jual_disk = "";
 

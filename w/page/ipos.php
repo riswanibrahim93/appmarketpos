@@ -45,11 +45,11 @@
         	<div class="form-group">
              <label for="basicInput">Gunakan Manual Pencarian</label>
               <select class="form-control select2" name="barang" id="barang" onchange="add_data()">
-<?php error_reporting(0);           
-   $ketQuery = "SELECT * FROM tabel_barang ORDER BY nm_barang ASC";
-   $executeSat = mysqli_query($koneksi, $ketQuery);
-   while ($a=mysqli_fetch_array($executeSat)) {
-?>              
+                <?php error_reporting(0);           
+                   $ketQuery = "SELECT * FROM tabel_barang ORDER BY nm_barang ASC";
+                   $executeSat = mysqli_query($koneksi, $ketQuery);
+                   while ($a=mysqli_fetch_array($executeSat)) {
+                ?>              
                    <option value="<?php echo $a['kd_barang'];?>"><?php echo $a['nm_barang'];?></option>
                    <?php } ?>
               </select>
@@ -68,18 +68,18 @@
               <th>EDIT</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody id="isi-tabel">
             <tr id="tabel-contoh">                                    
               <td>-</td>
               <td>-</td>
               <td>-</td>
-              <td>
+              <td>-
               <!-- <form> -->
-                 <div class="d-inline-block mb-1">
+                 <!-- <div class="d-inline-block mb-1">
                    <div class="input-group">
                      <input type="number" class="touchspin rounded-0" value="1">
                    </div>
-                 </div>
+                 </div> -->
                 <!-- </form>  -->
               </td>
               <!-- <td>-</td> -->
@@ -119,85 +119,101 @@
   </div>
  </section>
 <!-- Data list view end -->
- </div>
- <div class="col-lg-4 col-md-12 col-sm-12">
- 	<div class="card">           
-       <div class="content-body">
-        <div class="card-body">
-        	
-          <div class="card">
-            <div class="card-content">
-               <div class="card-body">
-                  <form class="form form-horizontal" method="post" action="index.php?menu=nota">
-                      <div class="form-body">
-                         <div class="row">
-                              <div class="col-12 mb-2">
-                                    <h3 class="display-4 text-center m-1"> No. Nota</h3>
-                               </div> 
-                                  
-                              <div class="col-12">
-                                 <div class="form-group row">
-                                    <div class="col-md-4"><span>Total</span></div>
-                                    <div class="col-md-8">
-                                       <div class="position-relative has-icon-left">
-                                           <input type="text" class="form-control" id="sum-price" name="" placeholder="Total">
-                                         <div class="form-control-position"><i class="fas fa-tasks"></i></div>
-                                       </div>
-                                     </div>
-                                  </div>
-                                </div>
-                                
-                                <div class="col-12">
-                                  <div class="form-group row">
-                                     <div class="col-md-4"><span>Kembali</span></div>
-                                       <div class="col-md-8">
-                                          <div class="position-relative has-icon-left">
-                                             <input type="text" class="form-control" id="change-price" name="" placeholder="Kembali">
-                                            <div class="form-control-position"><i class="fas fa-money-bill-wave-alt"></i></div>
-                                           </div>
-                                         </div>
-                                      </div>
-                                  </div>
-                                  
-                                 <div class="col-12 mb-2">
-                                  <fieldset>
-                                    <label for="basicInput">Cash</label>
-                                     <div class="input-group">
-                                         <input type="text" id="kembalian" class="form-control" placeholder="Masukkan Jumlah Uang" aria-describedby="button-addon2">
-                                            <div class="input-group-append" id="button-addon2">
-                                               <button class="btn btn-primary rounded-0" type="button" onclick="hitung_kembalian()" >HITUNG</button>
-                                            </div>
-                                         </div>
-                                  </fieldset>
-                                  </div> 
-                                  
-                                                 
-                                                    
-                                  <div class="btn-group" role="group" aria-label="Basic example">
-                                     <button type="submit" class="btn btn-primary rounded-0 mr-1 mb-1">Simpan</button>
-                                     <button type="submit" class="btn btn-warning rounded-0 mr-1 mb-1">Diskon</button>
-                                     <button type="reset" class="btn btn-danger rounded-0 mr-1 mb-1">Batal</button>
-                                  </div>
-                                </div>
+  </div>
+    <div class="col-lg-4 col-md-12 col-sm-12">
+   	  <div class="card">           
+        <div class="content-body">
+          <div class="card-body">
+          	
+            <div class="card">
+              <div class="card-content">
+                <div class="card-body">
+                  <form class="form form-horizontal" method="post" action="../aksi/add_penjualan.php">
+                    <div class="form-body">
+                      <div class="row">
+                        <div class="col-12 mb-2">
+                          <h3 class="display-4 text-center m-1"> No. Nota</h3>
+                        </div> 
+
+                        <input type="text" name="kd_barang" id="id_barang" hidden>
+
+                        <input type="text" name="jumlah" id="jumlah" hidden>
+                            
+                        <div class="col-12">
+                           <div class="form-group row">
+                              <div class="col-md-4"><span>Harga Total</span></div>
+                              <div class="col-md-8">
+                                 <div class="position-relative has-icon-left">
+                                     <input type="text" readonly class="form-control" id="must-price" name="total" placeholder="Total">
+                                   <div class="form-control-position"><i class="fas fa-tasks"></i></div>
+                                 </div>
+                               </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                          <div class="form-group row">
+                             <div class="col-md-4"><span>Bayar</span></div>
+                               <div class="col-md-8">
+                                  <div class="position-relative has-icon-left">
+                                     <input type="text" readonly class="form-control" id="price" name="bayar" placeholder="Bayar">
+                                    <div class="form-control-position"><i class="fas fa-money-bill-wave-alt"></i></div>
+                                   </div>
+                                 </div>
                               </div>
-                            </form>
-                          </div>
+                        </div>
+                          
+                        <div class="col-12">
+                          <div class="form-group row">
+                             <div class="col-md-4"><span>Kembali</span></div>
+                               <div class="col-md-8">
+                                  <div class="position-relative has-icon-left">
+                                     <input type="text" readonly class="form-control" id="change-price" name="kembalian" placeholder="Kembali">
+                                    <div class="form-control-position"><i class="fas fa-money-bill-wave-alt"></i></div>
+                                   </div>
+                                 </div>
+                              </div>
+                        </div>
+                            
+                        <div class="col-12 mb-2">
+                          <fieldset>
+                            <label for="basicInput">Cash</label>
+                             <div class="input-group">
+                                 <input type="text" id="cash" class="form-control" placeholder="Masukkan Jumlah Uang" aria-describedby="button-addon2">
+                                    <div class="input-group-append" id="button-addon2">
+                                       <button class="btn btn-primary rounded-0" type="button" onclick="hitung_kembalian()" >HITUNG</button>
+                                    </div>
+                                 </div>
+                          </fieldset>
+                        </div> 
+                                           
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                           <button type="submit" class="btn btn-primary rounded-0 mr-1 mb-1" name="add_penjualan">Simpan</button>
+                           <button type="button" class="btn btn-warning rounded-0 mr-1 mb-1">Diskon</button>
+                           <button type="reset" class="btn btn-danger rounded-0 mr-1 mb-1">Batal</button>
                         </div>
                       </div>
-                   </div>  
-        
+                    </div>
+                  </form>
+                  <!-- <button type="button" onclick="hitungDataTabel()">hi</button> -->
+                </div>
+              </div>
+            </div>
+          </div>  
+          
+          </div>
         </div>
-       </div>
-     </div>
- </div>
+    </div>
+  </div>
 </div>         
 
   
  </div>
 </div>
 <script type="text/javascript">
+  
   function add_data() {
-    console.log($("#barang").val())
+    // console.log($("#barang").val())
 
     $.ajax({
 
@@ -216,10 +232,10 @@
         success: function(data) {
             // console.log(data)
             response = JSON.parse(data);
-            console.log(response);
+            // console.log(response);
 
             var text =`<tr id="kode${response.kd_barang}">                                    
-                        <td>${response.kd_barang}</td>
+                        <td id="kd_barang">${response.kd_barang}</td>
                         <td>${response.nm_barang}</td>
                         <td>${response.hrg_jual}</td>
                         <td>
@@ -314,27 +330,63 @@
 
       $("#sum_price").text("Rp." + totalHarga);
 
+      $("#must-price").val(totalHarga);
+
       $("#sum-product").text(jumlahBarang);
 
-      hitung_kembalian();
+      // hitung_kembalian();
 
   }
 
 
 
   function hitung_kembalian() {
+    
 
-    var bayar = $("#kembalian").val();
+    var bayar = $("#cash").val();
 
-    var totalBayar = $("#sum_price").text();
+    var totalBayar = $("#must-price").val();
 
-    var kembalian = bayar - totalBayar.substr(3);
+    var kembalian = bayar - totalBayar;
+
+    $("#price").val(bayar);
 
     $("#change-price").val(kembalian);
 
-    $("#kembalian").val("");
+    $("#cash").val("");
 
     $("#sum-price").val("Rp." + bayar);
+
+    hitungDataTabel()
+
+  }
+
+  function hitungDataTabel()
+  {
+    var kode = "";
+    var jml = "";
+
+    $("#isi-tabel tr").each(function(i) {
+
+        var self = $(this);
+
+        var col_0 = self.find("td:eq(0)").text().trim();
+
+        var col_4 = self.find("td:eq(3) input[type='number']").val();
+
+        kode += col_0+',';
+        jml += col_4+',';
+
+    });
+
+
+    kode = kode.substring(0, kode.length-1);
+    jml = jml.substring(0, jml.length-1);
+
+    $('#id_barang').val(kode);
+    $('#jumlah').val(jml);
+
+    // console.log(kode)
 
   }
 

@@ -1,9 +1,11 @@
-<?php include "../inc/koneksi.php"; $a = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM tabel_toko"));
+<?php include "../inc/koneksi.php"; 
+$a = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM `tabel_toko` WHERE `kd_toko` = '000'"));
 $background 	= $a['background'];
 $headerfooter 	= $a['headerfooter'];
 $tombol		 	= $a['tombol'];
 $logo		 	= $a['logo'];
 $toko		 	= $a['nm_toko'];
+
 ?>
 <!DOCTYPE html>
 <html class="loading" lang="en" data-textdirection="ltr">

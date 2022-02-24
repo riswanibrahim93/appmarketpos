@@ -18,6 +18,7 @@
 		$_SESSION['id_user'] = $data['id_user'];
 		$_SESSION['email_user'] = $data['email_user'];
 		$_SESSION['akses'] = $data['akses'];
+		$_SESSION['kd_toko'] = $data['kd_toko'];
 		echo "<script>alert('Berhasil Login');window.location= '../page/?menu=home';</script>";
 	}else{
 		echo "<script>alert('Gagal Login');window.location= 'login.php';</script>";

@@ -8,6 +8,7 @@ include '../inc/koneksi.php';
 
 if(isset($_POST['upload_product'])){
 
+	$kd_toko = $_SESSION['kd_toko'];
 	$kode = "";
 	$nama = "";
 	$kategori = "";
@@ -161,7 +162,6 @@ if(isset($_POST['upload_product'])){
 		echo "<script>alert('Tambah deskripsi');history.back()</script>";
 		return false;
 	}
-	$kd_toko = "";
 	$diskon = "";
 	$hrg_jual_disk = "";
 
