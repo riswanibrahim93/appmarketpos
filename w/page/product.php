@@ -251,10 +251,15 @@
                                    <td><?php echo $hasilSatuan['nm_satuan']; ?></td>
                                    <td>
                                    		<!-- <a href="#" data-toggle="modal" data-target="#produk<?php echo $b['kd_barang'] ?>"> -->
-                                      <!-- <a href="index.php?menu=edit_product"> -->
-                                        <a onclick="show(`<?php echo $b['kd_barang'] ?>`)">
-                                        	<i class="fas fa-edit"></i></a>
-                                        <a class="action-delete" onclick="deleteImage(`<?php echo $b['kd_barang'] ?>`)"><i class="fas fa-trash-alt"></i></a>
+                                      <a href="index.php?kode_produk=<?php echo $b['kd_barang'] ?>">
+                                        <i class="fas fa-edit"></i>
+                                      </a>
+                                      <!-- <a onclick="show(`<?php echo $b['kd_barang'] ?>`)">
+                                      	<i class="fas fa-edit"></i>
+                                      </a> -->
+                                      <a class="action-delete" onclick="deleteImage(`<?php echo $b['kd_barang'] ?>`)">
+                                        <i class="fas fa-trash-alt"></i>
+                                      </a>
                                    </td>
                                  </tr>
                                    <?php } ?>                                                  

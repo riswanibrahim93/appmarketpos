@@ -135,6 +135,10 @@ $foto		 	= $user['foto'];
 	//if ($_SESSION['level'] == "admin" || $_SESSION['level'] == 'superadmin') {
 ?>
 <?php          
+        
+        if (isset($_GET['kode_produk'])){
+            include('show_product.php');
+        } 
           if (isset($_GET['menu'])) {
             $menu = $_GET['menu'];
             switch ($menu) {
@@ -195,7 +199,17 @@ $foto		 	= $user['foto'];
 <?php } ?>
 <?php if ($_SESSION['akses'] == 'merchant') {
 ?>
-<?php          
+<?php 
+        if (isset($_GET['kode_produk'])){
+            $id = $_GET['kode_produk'];
+            ?>
+            <div class="app-content content">
+                yrucifrhg
+            </div>
+            <?php 
+            echo $id;
+            include('add_product.php?id_produk=<?php echo $id; ?>');
+        }         
           if (isset($_GET['menu'])) {
             $menu = $_GET['menu'];
             switch ($menu) {
