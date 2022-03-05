@@ -84,10 +84,10 @@ $halaman = isset($_GET['halaman'])?(int)$_GET['halaman'] : 1;
 $halaman_awal = ($halaman>1) ? ($halaman * $batas) - $batas : 0;	
 $previous = $halaman-1;
 $next = $halaman+1;
-$data = mysqli_query($koneksi,"SELECT * FROM tabel_member,tabel_penjualan WHERE tabel_penjualan.sisa = 'wait' AND tabel_penjualan.id_user = tabel_member.id_user");
+$data = mysqli_query($koneksi,"SELECT * FROM tabel_member,tabel_penjualan WHERE tabel_penjualan.id_user = tabel_member.id_user");
 $jumlah_data = mysqli_num_rows($data);
 $total_halaman = ceil($jumlah_data / $batas);
-$data_barang = mysqli_query($koneksi,"SELECT * FROM tabel_member,tabel_penjualan WHERE tabel_penjualan.sisa = 'wait' AND tabel_penjualan.id_user = tabel_member.id_user limit $halaman_awal, $batas");
+$data_barang = mysqli_query($koneksi,"SELECT * FROM tabel_member,tabel_penjualan WHERE tabel_penjualan.id_user = tabel_member.id_user limit $halaman_awal, $batas");
 $nomor = $halaman_awal+1;
 while($d = mysqli_fetch_array($data_barang)){
 $antrian   = $d['no_faktur_penjualan'];

@@ -25,7 +25,7 @@ if(isset($_POST['upload_edit_product'])){
 	$harga_grosir = "";
 	$deskripsi = "";
 	$stok = "";
-
+ 
 	$image_name = [];
 	$image_size = [];
 	$image_tm = [];

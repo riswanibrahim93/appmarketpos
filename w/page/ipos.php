@@ -45,11 +45,12 @@
         	<div class="form-group">
              <label for="basicInput">Gunakan Manual Pencarian</label>
               <select class="form-control select2" name="barang" id="barang" onchange="add_data()">
-                <?php error_reporting(0);           
-                   $ketQuery = "SELECT * FROM tabel_barang ORDER BY nm_barang ASC";
-                   $executeSat = mysqli_query($koneksi, $ketQuery);
-                   while ($a=mysqli_fetch_array($executeSat)) {
-                ?>              
+                  <option disabled selected>-- pilih barang --</option>
+                  <?php error_reporting(0);           
+                     $ketQuery = "SELECT * FROM tabel_barang ORDER BY nm_barang ASC";
+                     $executeSat = mysqli_query($koneksi, $ketQuery);
+                     while ($a=mysqli_fetch_array($executeSat)) {
+                  ?>              
                    <option value="<?php echo $a['kd_barang'];?>"><?php echo $a['nm_barang'];?></option>
                    <?php } ?>
               </select>
@@ -175,6 +176,14 @@
                               </div>
                         </div>
                             
+                        <div class="col-12 mb-2">
+                          <fieldset>
+                            <label for="basicInput">Pengiriman</label>
+                             <div class="input-group">
+                                 <input type="text" id="pengiriman" name="pengiriman" class="form-control" placeholder="Isi jika menggunakan jasa pengiriman" aria-describedby="button-addon2" onkeyup="hitung_total()">
+                                 </div>
+                          </fieldset>
+                        </div> 
                         <div class="col-12 mb-2">
                           <fieldset>
                             <label for="basicInput">Cash</label>
@@ -338,7 +347,22 @@
 
   }
 
-
+  function hitung_total(){
+    var total_bayar = $("#sum_price").text();
+    total_bayar = total_bayar.substring(3);
+    
+    var totalBayar = $("#must-price").val();
+    var pengiriman = $("#pengiriman").val();
+    var total = "";
+    console.log(total_bayar);
+    if(pengiriman == ""){
+      total = total_bayar
+    }
+    else{
+      total = parseInt(total_bayar)+parseInt(pengiriman);
+    }
+    $("#must-price").val(total);
+  }
 
   function hitung_kembalian() {
     

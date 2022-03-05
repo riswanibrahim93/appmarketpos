@@ -129,12 +129,14 @@ $foto		 	= $user['foto'];
 
 <body class="horizontal-layout horizontal-menu 2-columns navbar-floating footer-static ecommerce-application " data-open="hover" data-menu="horizontal-menu" data-col="2-columns" style="background:<?php echo $background;?>">
 
-<?php include '../inc/header.php' ;?>
+<?php 
+include '../inc/header.php';
+?>
 
 <?php if ($_SESSION['akses'] == 'admin') {
 	//if ($_SESSION['level'] == "admin" || $_SESSION['level'] == 'superadmin') {
 ?>
-<?php          
+<?php       
         
         if (isset($_GET['kode_produk'])){
             include('show_product.php');
@@ -181,6 +183,9 @@ $foto		 	= $user['foto'];
 			  case ('nota');
                 include('nota.php');
                 break;
+                case ('nota2');
+                include('nota2.php');
+                break;
 			  case ('sales');
                 include('report_sales.php');
                 break;	
@@ -199,17 +204,7 @@ $foto		 	= $user['foto'];
 <?php } ?>
 <?php if ($_SESSION['akses'] == 'merchant') {
 ?>
-<?php 
-        if (isset($_GET['kode_produk'])){
-            $id = $_GET['kode_produk'];
-            ?>
-            <div class="app-content content">
-                yrucifrhg
-            </div>
-            <?php 
-            echo $id;
-            include('add_product.php?id_produk=<?php echo $id; ?>');
-        }         
+<?php         
           if (isset($_GET['menu'])) {
             $menu = $_GET['menu'];
             switch ($menu) {
