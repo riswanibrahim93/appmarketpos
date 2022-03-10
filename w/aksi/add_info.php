@@ -1,5 +1,8 @@
 <?php
 session_start();
+if (!isset($_SESSION['nm_user']) && !isset($_SESSION['pass'])) {
+  header('location:../aut/login.php');
+} 
 
 // var_dump($_POST);
 // var_dump($_FILES);

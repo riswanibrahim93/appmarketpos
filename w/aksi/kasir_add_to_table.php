@@ -2,6 +2,7 @@
 
     include "../inc/koneksi.php";
 
+
     $kodeBarang = $_POST['id_barang'];
 
     $selectBarang =  mysqli_query($koneksi, "SELECT * FROM tabel_barang WHERE kd_barang = '$kodeBarang'");

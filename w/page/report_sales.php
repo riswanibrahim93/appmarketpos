@@ -97,10 +97,10 @@ $jumlah = mysqli_fetch_array(mysqli_query($koneksi, "SELECT SUM(total_penjualan)
                               ?>
                                <tbody> 
                                 <tr>
-                                  <td><?php echo $no = $no + 1; ?></td>
-                                  <td><?php echo $row['no_faktur_penjualan']; ?></td>
-                                  <td><?php echo $row['tgl_penjualan']; ?></td>
-                                  <td>
+                                  <td style="vertical-align: top;"><?php echo $no = $no + 1; ?></td>
+                                  <td style="vertical-align: top;"><?php echo $row['no_faktur_penjualan']; ?></td>
+                                  <td style="vertical-align: top;"><?php echo $row['tgl_penjualan']; ?></td>
+                                  <td style="vertical-align: top;">
                                     <!--?php echo number_format($row['total_penjualan'],0,',','.');?--><?php echo $row['total_penjualan']; ?></td>
                                   <td>
                                     <?php $c = mysqli_query($koneksi, "SELECT * FROM tabel_barang, tabel_rinci_penjualan WHERE tabel_barang.kd_barang = tabel_rinci_penjualan.kd_barang AND tabel_rinci_penjualan.no_faktur_penjualan = '$row[no_faktur_penjualan]' ");
@@ -115,10 +115,10 @@ $jumlah = mysqli_fetch_array(mysqli_query($koneksi, "SELECT SUM(total_penjualan)
                                     <?php } ?>
                     
                                   </td>
-                                  <td>
+                                  <td style="vertical-align: top;">
 <?php $e = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM tabel_member WHERE tabel_member.id_user = '$row[id_user]'")); ?>
                                     <?php echo $e['nm_user'] ?></td>
-                                  <td><?php echo $row['ket']; ?></td>
+                                  <td style="vertical-align: top;"><?php echo $row['ket']; ?></td>
                                 </tr>
                               <?php  } ?>
                               </tbody>

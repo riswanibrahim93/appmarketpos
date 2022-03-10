@@ -1,6 +1,9 @@
 <?php
 session_start();
 include '../inc/koneksi.php';
+if (!isset($_SESSION['nm_user']) && !isset($_SESSION['pass'])) {
+  header('location:../aut/login.php');
+} 
 
 if (isset($_POST['add_kategori'])) {
     $nama = $_POST['kategori'];

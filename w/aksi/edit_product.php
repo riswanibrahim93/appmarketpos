@@ -1,6 +1,9 @@
 <?php 
 session_start();
 include '../inc/koneksi.php';
+if (!isset($_SESSION['nm_user']) && !isset($_SESSION['pass'])) {
+  header('location:../aut/login.php');
+} 
 // var_dump($_POST);
 // var_dump($_FILES);
 // var_dump($_FILES);
@@ -170,7 +173,7 @@ if(isset($_POST['upload_edit_product'])){
 	// var_dump($images);
 	// die;
 
-	$query_tabel_barang = "UPDATE `tabel_barang` SET `nm_barang`='$nama',`kd_satuan`='$satuan',`kd_kategori`='$kategori',`kd_toko`='$kd_toko',`deskripsi`='$deskripsi',`panjang`='$panjang',`lebar`='$lebar',`tinggi`='$tinggi',`warna`='$warna',`tipe`='$type',`merek`='$merk',`hrg_jual`='$harga_beli',`hrg_grosir`='$harga_grosir',`hrg_beli`='$harga_jual',`diskon`='$diskon',`hrg_jual_disk`='$hrg_jual_disk' WHERE  `kd_barang`='$kode'";
+	$query_tabel_barang = "UPDATE `tabel_barang` SET `nm_barang`='$nama',`kd_satuan`='$satuan',`kd_kategori`='$kategori',`kd_toko`='$kd_toko',`deskripsi`='$deskripsi',`panjang`='$panjang',`lebar`='$lebar',`tinggi`='$tinggi',`warna`='$warna',`tipe`='$type',`merek`='$merk',`hrg_jual`='$harga_jual',`hrg_grosir`='$harga_grosir',`hrg_beli`='$harga_beli',`diskon`='$diskon',`hrg_jual_disk`='$hrg_jual_disk' WHERE  `kd_barang`='$kode'";
 	$hasil_tabel_barang=mysqli_query($koneksi,$query_tabel_barang);
 	
 	$query_tabel_barang_gambar = "UPDATE `tabel_barang_gambar` SET `gambar`='$images' WHERE `id_brg` = '$kode'";
@@ -182,18 +185,18 @@ if(isset($_POST['upload_edit_product'])){
 	if($query_tabel_barang){
 		if($query_tabel_barang_gambar){
 			if($query_tabel_stok_toko){
-				echo "<script>alert('Upload Produk Berhasil');history.back()</script>";
+				echo "<script>alert('Edit Produk Berhasil');history.go(-2)</script>";
 			}
 			else{
-				echo "<script>alert('Upload Produk Gagal');history.back()</script>";
+				echo "<script>alert('Edit Produk Gagal');history.go(-2)</script>";
 			}
 		}
 		else{
-			echo "<script>alert('Upload Produk Gagal');history.back()</script>";
+			echo "<script>alert('Edit Produk Gagal');history.go(-2)</script>";
 		}
 	}
 	else{
-		echo "<script>alert('Upload Produk Gagal');history.back()</script>";
+		echo "<script>alert('Edit Produk Gagal');history.go(-2)</script>";
 	}
 }
 

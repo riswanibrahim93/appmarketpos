@@ -1,6 +1,9 @@
 <?php 
 session_start();
 include '../inc/koneksi.php';
+if (!isset($_SESSION['nm_user']) && !isset($_SESSION['pass'])) {
+  header('location:../aut/login.php');
+} 
 // var_dump($_POST);
 // var_dump($_FILES);
 // die;
@@ -172,7 +175,7 @@ if(isset($_POST['upload_product'])){
 	// 	return false;
 	// }
 
-	$query_tabel_barang = "INSERT INTO tabel_barang values('$kode', '$nama', '$satuan', '$kategori', '$kd_toko', '$deskripsi', '$panjang', '$lebar', '$tinggi', '$warna', '$type', '$merk', '$harga_beli', '$harga_grosir', '$harga_jual', '$diskon', '$hrg_jual_disk')";
+	$query_tabel_barang = "INSERT INTO tabel_barang values('$kode', '$nama', '$satuan', '$kategori', '$kd_toko', '$deskripsi', '$panjang', '$lebar', '$tinggi', '$warna', '$type', '$merk',  '$harga_beli', '$harga_grosir',  '$harga_jual', '$diskon', '$hrg_jual_disk')";
 	$hasil_tabel_barang=mysqli_query($koneksi,$query_tabel_barang);
 	
 	$query_tabel_barang_gambar = "INSERT INTO tabel_barang_gambar values('','$kode','$images','')";
@@ -184,18 +187,22 @@ if(isset($_POST['upload_product'])){
 	if($query_tabel_barang){
 		if($query_tabel_barang_gambar){
 			if($query_tabel_stok_toko){
-				echo "<script>alert('Upload Produk Berhasil');history.go(-1);location.reload(true);</script>";
+				echo "<script>alert('Upload Produk Berhasil');setTimeout('location.href=`../page/index.php?menu=product`', 1);</script>";
+				// header("location:../page/index.php?menu=product");
 			}
 			else{
-				echo "<script>alert('Upload Produk Gagal');history.back()</script>";
+				echo "<script>alert('Upload Produk Gagal');setTimeout('location.href=`../page/index.php?menu=product`', 1);</script>";
+				// header("location:../page/index.php?menu=product");
 			}
 		}
 		else{
-			echo "<script>alert('Upload Produk Gagal');history.back()</script>";
+			echo "<script>alert('Upload Produk Gagal');setTimeout('location.href=`../page/index.php?menu=product`', 1);</script>";
+			// header("location:../page/index.php?menu=product");
 		}
 	}
 	else{
-		echo "<script>alert('Upload Produk Gagal');history.back()</script>";
+		echo "<script>alert('Upload Produk Gagal');setTimeout('location.href=`../page/index.php?menu=product`', 1);</script>";
+		// header("location:../page/index.php?menu=product");
 	}
 }
 

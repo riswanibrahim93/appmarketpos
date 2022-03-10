@@ -47,11 +47,11 @@
               <select class="form-control select2" name="barang" id="barang" onchange="add_data()">
                   <option disabled selected>-- pilih barang --</option>
                   <?php error_reporting(0);           
-                     $ketQuery = "SELECT * FROM tabel_barang ORDER BY nm_barang ASC";
+                     $ketQuery = "SELECT * FROM `tabel_barang` JOIN tabel_stok_toko WHERE tabel_barang.kd_barang = tabel_stok_toko.kd_barang ORDER BY nm_barang ASC";
                      $executeSat = mysqli_query($koneksi, $ketQuery);
                      while ($a=mysqli_fetch_array($executeSat)) {
                   ?>              
-                   <option value="<?php echo $a['kd_barang'];?>"><?php echo $a['nm_barang'];?></option>
+                   <option value="<?php echo $a['kd_barang'];?>"><?php echo $a['nm_barang'];?>&nbsp;&nbsp;(<?php echo $a['stok']; ?>)</option>
                    <?php } ?>
               </select>
            </div>
@@ -133,12 +133,47 @@
                     <div class="form-body">
                       <div class="row">
                         <div class="col-12 mb-2">
-                          <h3 class="display-4 text-center m-1"> No. Nota</h3>
+                          <?php 
+                            $kd_toko = $_SESSION['kd_toko'];
+                            // membuat nomor faktur
+                            $nomorFaktur = "OFF";
+                              $query_tabel_toko = "SELECT * FROM `tabel_toko` WHERE `kd_toko` = '$kd_toko'";
+                              $hasil_tabel_toko = mysqli_fetch_array(mysqli_query($koneksi, $query_tabel_toko));
+                            $nama_toko_upper = strtoupper(substr($hasil_tabel_toko['nm_toko'],0,3));
+                            // no faktur + nama toko
+                            $nomorFaktur .= $nama_toko_upper;
+
+                              $query_tabel_penjualan = "SELECT * FROM `tabel_penjualan` WHERE `no_faktur_penjualan` LIKE '%$nama_toko_upper%'";
+                              $hasil_tabel_penjualan = mysqli_query($koneksi, $query_tabel_penjualan);
+                              $old_faktur = "";
+                              $new_faktur = "";
+                              while($h=mysqli_fetch_array($hasil_tabel_penjualan)){
+                                $old_faktur = $h['no_faktur_penjualan'];
+                              }
+
+                            // no faktur + urutan
+                            if($old_faktur == null){
+                              $new_faktur .= "00001";
+                            }
+                            else{
+                              $old_faktur = substr($old_faktur,strlen($old_faktur)-5)+1;
+                              $nol = 5 - strlen($old_faktur);
+                              while($nol > 0){
+                                $new_faktur .= '0';
+                                $nol --;
+                              }
+                              $new_faktur = $new_faktur.$old_faktur;  
+                            }
+                            $nomorFaktur .= $new_faktur;
+                           ?>
+                          <h3 class="display-4 text-center m-1"><?php echo $nomorFaktur; ?></h3>
                         </div> 
 
                         <input type="text" name="kd_barang" id="id_barang" hidden>
 
                         <input type="text" name="jumlah" id="jumlah" hidden>
+
+                        <input type="text" name="faktur" value="<?php echo $nomorFaktur; ?>" hidden>
                             
                         <div class="col-12">
                            <div class="form-group row">
@@ -158,6 +193,7 @@
                                <div class="col-md-8">
                                   <div class="position-relative has-icon-left">
                                      <input type="text" readonly class="form-control" id="price" name="bayar" placeholder="Bayar">
+                                     <input type="text" id="price-awal" name="price-awal" hidden>
                                     <div class="form-control-position"><i class="fas fa-money-bill-wave-alt"></i></div>
                                    </div>
                                  </div>
@@ -197,9 +233,12 @@
                         </div> 
                                            
                         <div class="btn-group" role="group" aria-label="Basic example">
-                           <button type="submit" class="btn btn-primary rounded-0 mr-1 mb-1" name="add_penjualan">Simpan</button>
-                           <button type="button" class="btn btn-warning rounded-0 mr-1 mb-1">Diskon</button>
+                           <button type="submit" class="btn btn-primary rounded-0 mr-1 mb-1 ml-1" name="add_penjualan">Print</button>
+                           <button type="submit" class="btn btn-warning rounded-0 mr-1 mb-1" style="font-size: 10px; color: white;"  name="add_penjualan_tf">Pembayaran<br>Transfer</button>
                            <button type="reset" class="btn btn-danger rounded-0 mr-1 mb-1">Batal</button>
+                        </div>
+                        <div class="col-12">
+                          <span style="font-size: 10px;">*Note: Jika pembayaran transfer tidak usah mengisi kolom Cash</span>
                         </div>
                       </div>
                     </div>
@@ -246,7 +285,13 @@
             var text =`<tr id="kode${response.kd_barang}">                                    
                         <td id="kd_barang">${response.kd_barang}</td>
                         <td>${response.nm_barang}</td>
-                        <td>${response.hrg_jual}</td>
+                        <td>
+                          <div class="d-inline-block mb-1">
+                            <div class="input-group">
+                              <input type="text" value="${response.hrg_jual}" onkeyup="cek_jumlah()">
+                            </div>
+                          </div>
+                        </td>
                         <td>
                           <div class="d-inline-block mb-1">
                             <div class="input-group">
@@ -255,7 +300,7 @@
                           </div>
                         </td>
                         <td id="sum_harga">${response.hrg_jual}</td>
-                        <td><a href="#" class="action-delete" onclick="delete_('${response.kd_barang}')"><i class="far fa-trash-alt"></i></a></td>
+                        <td><a href="#" class="action-delete" onclick="delete_(this)"><i class="far fa-trash-alt"></i></a></td>
                       </tr>`;
             $("#tabel-contoh").remove();
 
@@ -267,14 +312,18 @@
 
             set_jumlah();
 
+            hitungDataTabel()
+
         }
 
     });
   }
 
-  function delete_(id){
-    console.log("kode"+id)
-    $("#kode"+id).remove();
+  function delete_(btn){
+    // console.log("kode"+id)
+    var row = btn.parentNode.parentNode;
+    row.parentNode.removeChild(row);
+    // $("#kode"+id+"").remove();
 
     cek_jumlah();
 
@@ -287,7 +336,7 @@
 
           var self = $(this);
 
-          var col_3 = self.find("td:eq(2)").text().trim();
+          var col_3 = self.find("td:eq(2) input[type='text']").val();
 
           var col_4 = self.find("td:eq(3) input[type='number']").val();
 
@@ -319,7 +368,7 @@
 
           var self = $(this);
 
-          var col_3 = self.find("td:eq(2)").text().trim();
+          var col_3 = self.find("td:eq(2) input[type='text']").val();
 
           var col_4 = self.find("td:eq(3) input[type='number']").val();
 
@@ -339,6 +388,8 @@
 
       $("#sum_price").text("Rp." + totalHarga);
 
+      $("#price-awal").val(totalHarga);
+
       $("#must-price").val(totalHarga);
 
       $("#sum-product").text(jumlahBarang);
@@ -350,7 +401,7 @@
   function hitung_total(){
     var total_bayar = $("#sum_price").text();
     total_bayar = total_bayar.substring(3);
-    
+
     var totalBayar = $("#must-price").val();
     var pengiriman = $("#pengiriman").val();
     var total = "";

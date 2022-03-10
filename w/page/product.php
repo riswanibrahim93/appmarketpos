@@ -109,7 +109,7 @@
                             $executeSat = mysqli_query($koneksi, $ketQuery);
                             while ($k=mysqli_fetch_array($executeSat)) {
                         ?> 
-                    <option value="<?php echo $k['kd_kategori'];?>"><?php echo $k['nm_kategori'];?> </option>
+                    <option value="<?php echo $k['kd_kategori'];?>"><?php echo $k['nm_kategori'];?></option>
                     <?php } ?>
                     </select>
           </div>
@@ -625,7 +625,6 @@
 <!---------------------------------------- Modal Produk------------------------------------>
 
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script type="text/javascript">
   // $(document).ready(function() {
   //   setTimeout(function(){

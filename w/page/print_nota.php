@@ -15,10 +15,16 @@
     session_start();
 
     include "../inc/koneksi.php";
+    if (!isset($_SESSION['nm_user']) && !isset($_SESSION['pass'])) {
+      header('location:../aut/login.php');
+    } 
 
     $kd_toko = $_SESSION['kd_toko'];    
     $no_faktur    = $_GET['faktur'];
-    $bayar    = $_GET['bayar'];
+    $bayar = 0;
+    if(isset($_GET['bayar'])){
+        $bayar    = $_GET['bayar'];
+    }
 
     $selectDataToko = mysqli_query($koneksi, "SELECT * FROM tabel_toko where kd_toko = '$kd_toko'");
 
@@ -92,6 +98,17 @@
         ?>
 
     <table border="0" style="width: 100%;">
+        <tr>
+
+            <td style="text-align: left; font-size: 12px;">Barang</td>
+
+            <td style="text-align: left; font-size: 12px;">Harga</td>
+
+            <td style="text-align: center; font-size: 12px;">Jml</td>
+
+            <td style="text-align: right; font-size: 12px;">Total</td>
+
+        </tr>
 
         <?php
 
@@ -102,6 +119,9 @@
             $grand_total = "";
 
             $pengiriman = "";
+
+            $ket = "";
+
 
             if ($selectDataBarang) {
 
@@ -120,17 +140,19 @@
 
                     $pengiriman = $dataBarang['biaya_pengiriman'];
 
+                    $ket = $dataBarang['ket'];
+
                     ?>
 
                     <tr>
 
-                        <td style="text-align: left;"><?php echo $hasil['nm_barang']?></td>
+                        <td style="text-align: left; font-size: 12px;"><?php echo $hasil['nm_barang']?></td>
 
-                        <td style="text-align: right;"><?php echo $dataBarang['harga']?></td>
+                        <td style="text-align: left; font-size: 12px;"><?php echo $dataBarang['harga']?></td>
 
-                        <td style="text-align: center;"><?php echo $dataBarang['jumlah']?></td>
+                        <td style="text-align: center; font-size: 12px;"><?php echo $dataBarang['jumlah']?></td>
 
-                        <td style="text-align: right;"><?php echo $dataBarang['sub_total_jual']?></td>
+                        <td style="text-align: right; font-size: 12px;"><?php echo $dataBarang['sub_total_jual']?></td>
 
                     </tr>
 
@@ -221,17 +243,35 @@
 
         <tr>
 
-            <td style="text-align: left;">Kembali</td>
+            <?php 
+                $sisa = intval($bayar)-intval($grand_total);
+                if($sisa < 0){
+            ?>
+                <td style="text-align: left;">Kurang</td>
 
-            <td style="text-align: center;">:</td>
+                <td style="text-align: center;">:</td>
 
-            <td style="text-align: left;"></td>
+                <td style="text-align: left;"></td>
 
-            <td style="text-align: right;">
-                <?php
-                    echo intval($bayar)-intval($grand_total);
-                ?>   
-            </td>
+                <td style="text-align: right;">
+                    <?php
+                        echo $sisa;
+                    ?>   
+                </td>
+            <?php } else{?>
+                <td style="text-align: left;">Kembali</td>
+
+                <td style="text-align: center;">:</td>
+
+                <td style="text-align: left;"></td>
+
+                <td style="text-align: right;">
+                    <?php
+                        echo $sisa;
+                    ?>   
+                </td>
+            <?php } ?>
+
 
         </tr>
 
@@ -241,7 +281,7 @@
 
             <td style="text-align: center;">:</td>
 
-            <td style="text-align: left;">Kas</td>
+            <td style="text-align: left;"><?php echo $ket;?></td>
 
             <td style="text-align: right;"></td>
 
@@ -279,6 +319,9 @@
 
         ditukar/dikembalikan
 
+        <br><br>
+
+        <a href="index.php?menu=ipos" style="text-decoration: none; color: black;">Terimakasih</a>
     </P>
 
 </div>

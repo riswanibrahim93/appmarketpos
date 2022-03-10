@@ -116,6 +116,11 @@
             </a>
           </div>
 <?php  }  ?>
+
+<?php $satQuery = "SELECT COUNT(no_faktur_retur) as retur FROM tabel_retur";
+      $executeSat = mysqli_query($koneksi, $satQuery);
+      while ($retur=mysqli_fetch_array($executeSat)) {
+?> 
                   
         <div class="col-xl-3 col-md-4 col-sm-6 col-6">
            <a href="index.php?menu=retur" class="text-dark"> 
@@ -127,14 +132,20 @@
                           <i class="fas fa-recycle font-medium-5"></i>
                         </div>
                       </div>
-                    <h2 class="text-bold-700">1</h2>
+                    <h2 class="text-bold-700"><?=$retur['retur']?></h2>
                   <p class="mb-0 line-ellipsis">Return</p>
                 </div>
              </div>
             </div>
             </a>
           </div>
-          
+<?php  }  ?> 
+
+<?php $satQuery = "SELECT COUNT(no_faktur_penjualan) as jml FROM tabel_penjualan";
+      $executeSat = mysqli_query($koneksi, $satQuery);
+      $jml = 0;
+      while ($jml=mysqli_fetch_array($executeSat)) {
+?> 
           <div class="col-xl-3 col-md-4 col-sm-6 col-6">
            <a href="index.php?menu=sales" class="text-dark"> 
             <div class="card text-center">
@@ -145,14 +156,20 @@
                           <i class="fas fa-paste font-medium-5"></i>
                         </div>
                       </div>
-                    <h2 class="text-bold-700">1</h2>
+                    <h2 class="text-bold-700"><?=$jml['jml'];?></h2>
                   <p class="mb-0 line-ellipsis">Laporan Penjualan</p>
                 </div>
              </div>
             </div>
             </a>
           </div>
-          
+<?php  }  ?>
+
+<?php $satQuery = "SELECT COUNT(no_faktur_penjualan) as jml FROM tabel_penjualan";
+      $executeSat = mysqli_query($koneksi, $satQuery);
+      $jml = 0;
+      while ($jml=mysqli_fetch_array($executeSat)) {
+?>
           <div class="col-xl-3 col-md-4 col-sm-6 col-6">
            <a href="index.php?menu=balance" class="text-dark"> 
             <div class="card text-center">
@@ -163,14 +180,20 @@
                           <i class="fas fa-balance-scale font-medium-5"></i>
                         </div>
                       </div>
-                    <h2 class="text-bold-700">1</h2>
+                    <h2 class="text-bold-700"><?=$jml['jml'];?></h2>
                   <p class="mb-0 line-ellipsis">Laporan Laba</p>
                 </div>
              </div>
             </div>
             </a>
           </div>
-          
+<?php  }  ?>
+
+<?php $satQuery = "SELECT COUNT(no_faktur_penjualan) as jml FROM tabel_penjualan";
+      $executeSat = mysqli_query($koneksi, $satQuery);
+      $jml = 0;
+      while ($jml=mysqli_fetch_array($executeSat)) {
+?>
           <div class="col-xl-3 col-md-4 col-sm-6 col-6">
            <a href="index.php?menu=stock" class="text-dark"> 
             <div class="card text-center">
@@ -181,13 +204,14 @@
                           <i class="fas fa-clipboard-list font-medium-5"></i>
                         </div>
                       </div>
-                    <h2 class="text-bold-700">1</h2>
+                    <h2 class="text-bold-700"><?=$jml['jml'];?></h2>
                   <p class="mb-0 line-ellipsis">Laporan Stock</p>
                 </div>
              </div>
             </div>
             </a>
           </div>
+<?php  }  ?>
         
         </div>  
                     

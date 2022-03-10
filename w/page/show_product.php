@@ -1,20 +1,19 @@
 <?php 
 
-  session_start();
-  include '../inc/koneksi.php';
-
   // $id_produk = $_GET['id_produk'];
   $id_produk = $_GET['kode_produk'];
+  // var_dump($id_produk);
+  // die;
 
-  $ketQuery = "SELECT * FROM `tabel_barang` WHERE `kd_barang` = $id_produk";
+  $ketQuery = "SELECT * FROM `tabel_barang` WHERE `kd_barang` = '$id_produk'";
   $executeSat = mysqli_query($koneksi, $ketQuery);
   $barang=mysqli_fetch_array($executeSat);
 
-  $ketQuery = "SELECT * FROM `tabel_stok_toko` WHERE `kd_barang` = $id_produk";
+  $ketQuery = "SELECT * FROM `tabel_stok_toko` WHERE `kd_barang` = '$id_produk'";
   $executeSat = mysqli_query($koneksi, $ketQuery);
   $stok=mysqli_fetch_array($executeSat);
 
-  $ketQuery = "SELECT * FROM `tabel_barang_gambar` WHERE `id_brg` = $id_produk";
+  $ketQuery = "SELECT * FROM `tabel_barang_gambar` WHERE `id_brg` = '$id_produk'";
   $executeSat = mysqli_query($koneksi, $ketQuery);
   $gambar=mysqli_fetch_array($executeSat);
 
@@ -317,7 +316,7 @@
               </div>
               <div class="row">
                 <div class="col-12 mt-1">
-                    <input type="submit" name="upload_edit_product" value="Upload" class="btn btn-primary rounded-0" />
+                    <input type="submit" name="upload_edit_product" value="Edit" class="btn btn-primary rounded-0" />
                     <input type="reset" value="Cancel" onClick="hide(0)" class="btn btn-danger rounded-0" />
                   </div>
               </div> 
